@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Jekyll | Lucas Possatti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="jekyll" />
+    
+    <meta name="description" content="Breve introdução ao Jekyll, um gerador de websites estáticos, com foco em blogs.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jekyll">
+<meta property="og:url" content="http://possatti.com.br/jekyll/index.html">
+<meta property="og:site_name" content="Lucas Possatti">
+<meta property="og:description" content="Breve introdução ao Jekyll, um gerador de websites estáticos, com foco em blogs.">
+<meta property="og:image" content="http://possatti.com.br/images/jekyll-logo.png">
+<meta property="og:updated_time" content="2015-03-25T07:56:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jekyll">
+<meta name="twitter:description" content="Breve introdução ao Jekyll, um gerador de websites estáticos, com foco em blogs.">
+<meta name="twitter:image" content="http://possatti.com.br/images/jekyll-logo.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/logo-black.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60892717-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">Sobre</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Busca"><input type="hidden" name="sitesearch" value="http://possatti.com.br"></form>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    sem categoria
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-jekyll" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Jekyll
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/jekyll/" class="article-date">
+    <time datetime="2014-08-22T10:27:29.000Z" itemprop="datePublished">22/08/2014</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jekyll/">jekyll</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/jekyll-logo.png" alt=""></p>
+<p>Nesse primeiro post eu resolvi escrever sobre a ferramenta (Jekyll) que eu usei para criar o meu primeiro blog, e como ela pode ser útil para vários propósitos.</p>
+<h3 id="O-que-e-o-Jekyll"><a href="#O-que-e-o-Jekyll" class="headerlink" title="O que é o Jekyll?"></a>O que é o Jekyll?</h3><p>O <a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a> é um gerador de websites estáticos. Em poucas palavras, o que ele faz é converter um monte de html, css, javascript, markdown, etc em um website estático. Para usa-lo, você define templates para exibir diferentes tipos de publicações, e define o conteúdo separadamente.</p>
+<p>Já que você irá definir a parte bruta através de HTML, CSS e JavaScript, isso te permite ter controle total sobre o estilo do website. Ao mesmo tempo que te permite publicar todo o tipo de conteúdo que você definir.</p>
+<p>Você ganha praticidade quando resolve esquematizar o projeto, dividindo-o em templates e conteúdo. Por exemplo, você pode definir um template para posts de um blog, e define o conteúdo dos posts usando uma linguagem mais simples como <a href="http://en.wikipedia.org/wiki/Markdown" target="_blank" rel="external">markdown</a> ou <a href="http://en.wikipedia.org/wiki/Textile_%28markup_language%29" target="_blank" rel="external">textile</a> (markdown é o mais usado). Assim, o Jekyll irá se responsabilizar por processar esse conteúdo e enquadra-lo na definição do seu template de posts. Com isso, o resultado final é uma página html completa com o seu conteúdo. Você pode inclusive ter mais de uma definição de template para posts, e em cada post especificar qual template você deseja usar.</p>
+<p>O foco principal do Jekyll está na criação de blogs, mas ele também pode ser usado para projetos mais ambiciosos como por exemplo <a href="http://www.developmentseed.org/blog/new-healthcare-gov-is-open-and-cms-free/" target="_blank" rel="external">o projeto que o grupo Development Seed fez</a> para criar o portal <a href="https://www.healthcare.gov/" target="_blank" rel="external">HealthCare.gov</a> para o governo norte americano.</p>
+<p>Ferramentas como essa parecem estar ganhado uma popularidade cada vez maior, como alternativas a CMSs (Content Management System), como o <a href="http://wordpress.org/" target="_blank" rel="external">Wordpress</a> e o <a href="https://www.drupal.org/" target="_blank" rel="external">Drupal</a>. Pois elimina elementos custosos do desenvolvimento e da manutenção, ao mesmo tempo que te permite um maior controle sobre a estrutura do website. Como exemplo, em um website estático você não precisa se preocupar com um banco de dados. Assim você elimina o custo de ter um, e também de ter pessoas que saibam usá-lo.</p>
+<p>Porém, com isso você pode acabar perdendo alguma funcionalidade dinâmica de um CMS, que a princípio necessite de uma aplicação do lado do servidor. Mas você pode facilmente compensar isso usando APIs de terceiros para compor o seu website. Uma funcionalidade comum de um CMS é a gestão de comentários nas páginas. Mas como você poderia alcançar o mesmo efeito em um site totalmente estático? Você pode usar uma API como a do <a href="https://disqus.com/" target="_blank" rel="external">Disqus</a>, que vem ganhando bastante popularidade recentemente, ou a do <a href="https://developers.facebook.com/docs/plugins/comments" target="_blank" rel="external">Facebook</a>. Assim, no final das contas, o que você tem é um pequeno código HTML-JavaScript que você joga em seu template, e assim todas as páginas ganham uma seção de comentários. Uhuul!</p>
+<p>Mas fazer a escolha entre utilizar um CMS ou um gerador de sites estáticos é uma decisão delicada, e que deve ser pensada com cuidado, tendo em vista o objetivo final do projeto.</p>
+<h3 id="Personalizacao-do-projeto"><a href="#Personalizacao-do-projeto" class="headerlink" title="Personalização do projeto"></a>Personalização do projeto</h3><p>É possível ainda, acrescentar outras ferramentas no ciclo de vida do seu projeto. Deixando o desenvolvimento mais a seu próprio gosto. Por exemplo, você pode combinar pre-processadores (como o <a href="http://lesscss.org/" target="_blank" rel="external">Less</a> ou <a href="http://sass-lang.com/" target="_blank" rel="external">Sass</a>) para a sua build.</p>
+<p>E se você não quiser se preocupar com o desenvolvimento bruto do site, você pode simplesmente escolher um tema já pronto, e se preocupar apenas com o conteúdo. Mas isso te limita a usar o que outras pessoas já criaram.</p>
+<p>Existem vários temas para o Jekyll já prontos, a grande maioria deles focada em blogs. Basta escolher um deles, e começar a publicar… como eu fiz ;) . Mas se você tiver os conhecimentos necessários, você pode se aventurar e criar o seu próprio tema, e assim construir tudo completamente personalizado.</p>
+<p>E como eu disse, há vários temas espalhados pela internet (você pode dar uma olhada <a href="http://jekyllthemes.org/" target="_blank" rel="external">nesse link</a> para conferir vários deles) feitos por diversas pessoas que resolveram compartilhar seus trabalhos. Há alguns bem simples e outros mais elaborados e de muito bom gosto. Cabe a você escolher.</p>
+<p>Mas já adianto que se você pretende criar algo muito diferente de um blog, você provavelmente terá que criar tudo manualmente. Isso não é problema do Jekyll em si, pois ele suporta a geração de diversos tipos de conteúdo, e é possível customiza-lo para o que for necessário. Mas se o que você quer for muito específico é provável que você não encontrará nada pronto pela internet.</p>
+<p>Se o Jekyll não te atender em algum aspecto você pode experimentar outros geradores de sites estáticos como: <a href="http://octopress.org/" target="_blank" rel="external">Octopress</a> (usa o Jekyll), <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>, <a href="http://nanoc.ws/" target="_blank" rel="external">nanoc</a>, entre <a href="http://staticsitegenerators.net/" target="_blank" rel="external">vários outros</a>.</p>
+<h3 id="Como-usar"><a href="#Como-usar" class="headerlink" title="Como usar"></a>Como usar</h3><p>Não adianta chorar, você provavelmente terá que sujar as mãos em algum momento e usar a linha de comando. Mas não é difícil como algumas pessoas pensam. Logo, pare de reclamar, se for o seu caso, e siga em frente. ¬¬</p>
+<p>Para exemplificar o uso do Jekyll, vou descrever aqui como criar e gerenciar um blog simples, sem nada demais. Assim você terá conhecimento de como ele funciona, e poderá, então, escolher se irá personalizar tudo na mão ou pegar um tema já pronto e pular o trabalho duro. De qualquer forma, é útil ter um conhecimento de como ele funciona.</p>
+<p>O primeiro passo de todos é instala-lo na sua máquina. Para isso consulte as <a href="http://jekyllrb.com/docs/installation/" target="_blank" rel="external">intruções de instalação</a> no site oficial. Lá você encontra instruções detalhadas para a instalação na sua plataforma específica.</p>
+<p>Porém, um método fácil de instala-lo é usando o RubyGem (gerenciador de pacotes da linguagem Ruby), através de um único comando:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Talvez você tenha que usar sudo</span></span><br><span class="line">$ gem install jekyll</span><br></pre></td></tr></table></figure>
+<p>Após isso, basta um comando para criar um novo projeto:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jekyll new meu-novo-blog</span><br></pre></td></tr></table></figure>
+<p>Assim o jekyll irá criar um exemplo de um blog bem básico com a estrutura exemplificada abaixo (para servir as páginas em localhost basta executar <code>jekyll serve</code>).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> meu-novo-blog</span><br><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── about.md</span><br><span class="line">├── _config.yml</span><br><span class="line">├── css</span><br><span class="line">│   └── main.css</span><br><span class="line">├── feed.xml</span><br><span class="line">├── _includes</span><br><span class="line">│   ├── footer.html</span><br><span class="line">│   ├── header.html</span><br><span class="line">│   └── head.html</span><br><span class="line">├── index.html</span><br><span class="line">├── _layouts</span><br><span class="line">│   ├── default.html</span><br><span class="line">│   ├── page.html</span><br><span class="line">│   └── post.html</span><br><span class="line">└── _posts</span><br><span class="line">    └── 2014-08-30-welcome-to-jekyll.markdown</span><br></pre></td></tr></table></figure>
+<p>Então, permita-me explicar um pouco sobre essa estrutura. <code>_config.yml</code> é o arquivo de configuração do seu site, que contém informações como: nome do site, seu e-mail, plugins usados, etc. Esse arquivo utiliza a sintaxe <a href="http://pt.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML</a>. O diretório <code>_includes</code> contém “pedaços de HTML” que você usará para definir seus layouts (templates). Em <code>_layouts</code> você deve colocar os seus templates. (Os layouts são páginas quase completas, esperando apenas para receberem conteúdo.) E, finalmente, em <code>_posts</code> você define seus posts em uma linguagem simples como o markdown, por exemplo.</p>
+<p>Se você investigar os arquivos html que foram gerados (em <code>_includes/</code> e <code>_layouts/</code>), verá que neles foi usado uma notação diferente no meio do html (um monte de chaves <code>{}</code> espalhados). Isso que está sendo usado, são tags <a href="http://liquidmarkup.org/" target="_blank" rel="external">Liquid</a>. Elas são <a href="http://jekyllrb.com/docs/templates/" target="_blank" rel="external">usadas pelo Jekyll para a definição dos templates</a>. Você precisará entender como elas funcionam para quando você quiser criar os seus próprios templates. Mas não são necessárias quando você estiver escrevendo seus posts.</p>
+<p>Você pode notar também que quando executamos <code>jekyll new</code>, ele criou uma página inicial (<code>index.html</code>) e um <code>about.md</code> (que quando processado se tornará <code>about.html</code>). Além disso, ele gerou um exemplo de um post para você em <code>_posts/</code>.</p>
+<p>A essa altura você deve querer visualizar o resultado de tudo isso. Então vamos em frente, e depois voltamos para esclarecer mais algumas coisas. Para gerar o website estático é necessário apenas executar o comando <code>jekyll build</code> e o jekyll irá processar todos os seus arquivos e gerar o resultado no diretório <code>_site</code>. Isso só já basta para você conseguir o que realmente importa (um website estático), mas vamos fazer um pouco mais do que isso, e vamos executar <code>jekyll serve</code>. Assim ele irá servir em localhost os arquivos gerados, para que você possa visualizar o site. Então, depois desse último comando, abra o navegador e entre em <code>localhost:4000</code>, por padrão, e veja o seu mais novo blog! Tcharaaam!</p>
+<p>Repare que é possível executar <code>jekyll serve --watch</code> para que o Jekyll fique “assistindo” o diretório do projeto. E quando qualquer mudança acontecer (quando você editar um post, por exemplo), ele irá gerar novamente os arquivos necessários. O único arquivo que ele não irá assistir é o <code>_config.yml</code>. E também repare que não é necessário executar <code>jekyll build</code> antes de <code>jekyll serve</code>, pois esse último já executa a build automaticamente.</p>
+<p>Entenda o que o Jekyll fez. Ele construiu o site, em basicamente duas etapas. Primeiramente, ele tomou todos os arquivos que necessitavam de processamento (os arquivos em markdown e textile) e os processou combinando com os layouts e includes necessários,  gerando arquivos de html para cada um deles. Repare que os diretórios de destino dos posts é diferente do comum, o Jekyll usa o nome do post para criar diretórios de destino para eles. Isso da seguinte forma, se você tem um post chamado <code>2014-10-19-exemplo.md</code> ele será processado e irá parar em <code>_site/2014/10/19/exemplo.html</code>. Mas fora isso, todos os arquivos vão parar em lugares segundo suas posições relativas ao diretório raiz do projeto (exemplo: <code>/about/index.md</code> é processado e vai parar em <code>_site/about/index.html</code>) da forma como você esperaria.</p>
+<p>A segunda etapa da build é mais simples. Ele copia todos os arquivos que não necessitam de processamento, como imagens, css, javascript, etc, para o diretório <code>_site/</code>. Então, por exemplo, um arquivo <code>/imagens/foto.jpg</code> vai parar em <code>_site/imagens/foto.jpg</code>).</p>
+<h3 id="YAML-Front-Matter"><a href="#YAML-Front-Matter" class="headerlink" title="YAML Front Matter"></a>YAML Front Matter</h3><p>Mas que tipo de arquivos são processados pelo Jekyll exatamente? E quais são simplesmente copiados sem processamento? Por definição do Jekyll, somente são processados os arquivos com extenções do markdown ou textile, e os arquivos que tenham um cabeçalho especial, chamado de <a href="http://jekyllrb.com/docs/frontmatter/" target="_blank" rel="external">“YAML Front Matter”</a>. Quando o Jekyll detectar esse tipo de cabeçalho ele irá processar o arquivo. Um “front matter” deve ser colocada logo no começo do arquivo e se parece com o seguinte:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">layout: post</span><br><span class="line">title: &quot;Jekylll&quot;</span><br><span class="line">modified: 2014-08-22 07:27:29 -0300</span><br><span class="line">tags: [jekyll]</span><br><span class="line">comments: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>A sintaxe utilizada para a codificação do “Front Matter” é a <a href="http://pt.wikipedia.org/wiki/YAML" target="_blank" rel="external">YAML</a> (assim como o arquivo <code>_config.yml</code>). E nessa seção você pode definir variaveis que serão utilizadas pelo Jekyll (como <code>layout</code> e <code>title</code>). E, até mesmo, variáveis personalizadas, como é o caso do exemplo acima em que a variável <code>comments</code> é utilizada pelo meu tema atual, para saber quando ele deve incluir uma seção de comentários, ou não, em um post.</p>
+<p>E se você quiser que o arquivo seja processado, mas ele não precisa de nenhuma variável, você ainda assim precisa de incluir o front matter. Mas pode deixa-lo vazio, sem nenhuma variável. Isso pode ser útil quando você quer usar Liquid Tags em arquivos css e javascript, por exemplo.</p>
+<h3 id="Hospedagem-no-Github-Pages"><a href="#Hospedagem-no-Github-Pages" class="headerlink" title="Hospedagem no Github Pages"></a>Hospedagem no Github Pages</h3><p>Ok… mas e depois que você criar o seu website e quiser publicá-lo na internet? Você pode optar por várias possibilidades, inclusive a de usar o seu próprio servidor pessoal. Porém, o que eu considero mais prático, no momento, é utilizar a hospedagem gratuita do <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a>. Para mim, a forma mais simples para publicar seu site, é você criar um repositório na sua conta do GitHub chamado <code>&lt;seu-nome-de-usuario&gt;.github.io</code> e subir o seu projeto do Jekyll para o novo repositório. O GitHub irá processar o seu projeto do Jekyll e gerar o seu website estático no endereço <code>&lt;seu-nome-de-usuario&gt;.github.io</code>. Simples assim. Apenas preste atenção na versão do Jekyll que você está usando e a versão que está sendo usada pelo GitHub (confira <a href="https://pages.github.com/versions/" target="_blank" rel="external">aqui</a>). Mas isso não deve ser um problema.</p>
+<p>Se preferir, você pode construir o site na sua máquina e subir o resultado final para o GitHub Pages. Isso é uma outra possibilidade. Assim, você tem controle de qual versão do Jekyll utilizar, e também usar plugins em sua build (coisa que o github bloqueia para evitar que plugins maliciosos executem). Você pode até usar um domínio personalizado se quiser. Para entender melhor como o GitHub Pages funciona, leia a <a href="https://pages.github.com/" target="_blank" rel="external">página oficial do Github Pages</a>.</p>
+<h3 id="O-que-fazer-depois"><a href="#O-que-fazer-depois" class="headerlink" title="O que fazer depois?"></a>O que fazer depois?</h3><p>Se você não sabe para onde ir agora, e o que fazer para aprender mais, eu te aconselho a brincar com o blog que criamos nesse tutorial. Crie um novo post; dê uma olhada em como funcionam os layouts e includes; futuque as Liquid Tags e veja como elas funcionam; etc.</p>
+<p>Se você ainda tiver dúvidas ou quiser entender melhor as coisas, eu recomendo que você dê uma olhada na <a href="http://jekyllrb.com/docs/home/" target="_blank" rel="external">documentação do Jekyll</a> (em inglês). A documentação é boa, e fala sobre vários aspectos da ferramenta. E tudo está escrito de forma clara e concisa.</p>
+<p>É isso aí! Até mais. :)</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://possatti.com.br/jekyll/" data-id="cipzurtuj000987re8trbnmi2" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>seguir:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="https://plus.google.com/+LucasPossatti" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/possatti" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/git-pro-tip-diretorios-vazios/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">novos</strong>
+        <p class="article-nav-title">
+        
+            Git Pro Tip: Diretórios vazios
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recentes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/zettajs/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/zetta-logo.svg)" alt="ZettaJS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/zettajs/" class="title">ZettaJS</a></p>
+                            <p class="item-date"><time datetime="2015-03-31T04:11:36.000Z" itemprop="datePublished">31/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/git-pro-tip-diretorios-vazios/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git-logo.png)" alt="Git Pro Tip: Diretórios vazios" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/git-pro-tip-diretorios-vazios/" class="title">Git Pro Tip: Diretórios vazios</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/jekyll/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/jekyll-logo.png)" alt="Jekyll" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/jekyll/" class="title">Jekyll</a></p>
+                            <p class="item-date"><time datetime="2014-08-22T10:27:29.000Z" itemprop="datePublished">22/08/2014</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">arquivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">Março 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">Agosto 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/">IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protip/">protip</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IoT/" style="font-size: 10px;">IoT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a> <a href="/tags/protip/" style="font-size: 10px;">protip</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Lucas Possatti</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'possatti';
+    
+    
+    var disqus_url = 'http://possatti.com.br/jekyll/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

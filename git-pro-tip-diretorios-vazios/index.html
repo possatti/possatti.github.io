@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Git Pro Tip: Diretórios vazios | Lucas Possatti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="git,protip" />
+    
+    <meta name="description" content="O git não grava pastas vazias em seus repositórios. Entenda porquê, e como contornar o problema.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Pro Tip: Diretórios vazios">
+<meta property="og:url" content="http://possatti.com.br/git-pro-tip-diretorios-vazios/index.html">
+<meta property="og:site_name" content="Lucas Possatti">
+<meta property="og:description" content="O git não grava pastas vazias em seus repositórios. Entenda porquê, e como contornar o problema.">
+<meta property="og:image" content="http://possatti.com.br/images/git-logo.png">
+<meta property="og:updated_time" content="2016-06-24T22:25:13.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Pro Tip: Diretórios vazios">
+<meta name="twitter:description" content="O git não grava pastas vazias em seus repositórios. Entenda porquê, e como contornar o problema.">
+<meta name="twitter:image" content="http://possatti.com.br/images/git-logo.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/logo-black.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60892717-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">Sobre</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Busca"><input type="hidden" name="sitesearch" value="http://possatti.com.br"></form>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    sem categoria
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-git-pro-tip-diretorios-vazios" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Git Pro Tip: Diretórios vazios
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/git-pro-tip-diretorios-vazios/" class="article-date">
+    <time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protip/">protip</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/git-logo.png" alt=""></p>
+<p>Nesse post vou falar sobre algo que me aborrecia quando comecei a usar o git. E que pode trazer dificuldades para outros que estejam iniciando com o git. Falarei sobre o fato de que ele não registra diretórios vazios no repositório.</p>
+<h2 id="O-problema"><a href="#O-problema" class="headerlink" title="O problema"></a>O problema</h2><p>Vamos supor a seguinte situação. Você tem um repositório do git, e acabou de criar um diretório vazio dentro dele. E ao tentar gravar suas mudanças, o git simplesmente não detecta que você criou um novo diretório. Como no exemplo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cria um diretório vazio</span></span><br><span class="line">$ mkdir novo_dir</span><br><span class="line"><span class="comment"># Revela o que há no diretório atual</span></span><br><span class="line">$ ls</span><br><span class="line">novo_dir</span><br><span class="line"><span class="comment"># Verifica o status do repositório</span></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">Initial commit</span><br><span class="line"></span><br><span class="line">nothing to commit (create/copy files and use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>
+<p>Como podem ver, no exemplo, o diretório vazio foi criado. Mas quando usamos o comando <code>git status</code>, ele simplesmente não detecta que um novo diretório foi criado.</p>
+<p>A razão disso é simples. O git registra apenas arquivos e não diretórios. Se a minha memória não me falha, no SVN você poderia criar diretórios vazios no repositório. Mas não é o caso do git. Pois tudo o que ele busca, para gravar, são arquivos. Então ele nem mesmo se preocupa com o fato de que você criou um novo diretório. Mas se você colocasse um arquivo ali dentro, aí sim, ele detectaria o arquivo e consequentemente o diretório que o contém.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cria um arquivo no novo diretório</span></span><br><span class="line">$ touch novo_dir/exemplo.txt</span><br><span class="line"><span class="comment"># Verifica o status do repositório</span></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">Initial commit</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">	novo_dir/</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br></pre></td></tr></table></figure>
+<p>Vejam que neste último comando ele detectou o diretório, mas somente por causa do arquivo. O que ele irá gravar, na realidade, é o arquivo. E uma das informações relevantes para gravar o arquivo é onde ele está.</p>
+<h2 id="Porque-isso-me-incomodaria"><a href="#Porque-isso-me-incomodaria" class="headerlink" title="Porque isso me incomodaria?"></a>Porque isso me incomodaria?</h2><p>Alguns podem estranhar, e se perguntar: “Mas e daí? O diretório está vazio mesmo!”. Hoje eu concordo com isso. Mas no começo isso me atrapalhava um pouco, quando eu estava começando a usar o git.</p>
+<p>Como, por exemplo, quando eu estava iniciando um novo projeto e usava uma ferramenta para gerar o esqueleto do meu projeto. Assim, a ferramenta criava uma porção de diretórios onde eu deveria colocar meus arquivos. Mas se eu ainda não tivesse desenvolvido nada ainda, eu teria que deixá-los vazio por algum tempo.</p>
+<p>Isso costumava acontecer comigo quando eu criava um novo projeto do <a href="https://maven.apache.org/" target="_blank" rel="external">maven</a> pelo eclipse. O eclipse criava várias pastas vazias, segundo a estrutura de um projeto padrão do maven. E essa estrutura era importante, porque ditava a forma como eu deveria organizar meu projeto. Se eu colocasse um teste no diretório errado, por exemplo, o maven não iria incorporá-lo a build. E por esse motivo, as coisas precisavam estar em seu devido lugar.</p>
+<p>E quando eu tentava gravar as alterações no repositório, o git simplesmente não detectava as novas pastas que haviam sido criadas, apenas os arquivos, como o <code>pom.xml</code>. Então se eu fosse usar um outro computador, e tivesse que clonar o projeto, ele não viria com a estrutura de pastas que eu precisava. Então eu teria que resgatar tudo da minha memória, ou gastar algum tempo procurando na internet como a estrutura deveria ser.</p>
+<h2 id="Solucao"><a href="#Solucao" class="headerlink" title="Solução"></a>Solução</h2><p>A verdade é que não existe uma solução elegante para isso. É uma característica do git que você deve se acostumar. E com o tempo, essa característica realmente passa a fazer sentido. Afinal de contas, para que gravar um diretório vazio? … Ele está vazio! Então não estamos perdendo nada.</p>
+<p>Mas como eu expliquei, em algumas situações você pode querer subir um diretório vazio intencionalmente. Se esse for o seu caso, há algumas alternativas que podemos recorrer. Há uma <a href="http://stackoverflow.com/questions/115983/how-can-i-add-an-empty-directory-to-a-git-repository" target="_blank" rel="external">questão no Stack Overflow</a> que tem excelentes sugestões de como fazer isso. E eu vou descrever aqui duas delas que considero mais importantes.</p>
+<p>Uma das possíveis soluções, é que você crie um arquivo vazio dentro da pasta, chamado <code>deletar-depois</code>, <code>placeholder</code>, ou qualquer coisa do gênero. O importante é que fique claro para você, e para sua equipe, que esse arquivo deve ser deletado assim que o diretório for preenchido com algum conteúdo importante.</p>
+<p>Outra alternativa é para o caso de você querer <strong>forçar</strong> com que o diretório esteja <strong>sempre</strong> vazio (sabe se lá, porque você iria querer isso xD ). Para esta situação, você pode criar um <a href="http://git-scm.com/docs/gitignore" target="_blank" rel="external"><code>.gitignore</code></a> dentro da pasta, com o seguinte conteúdo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Ignora tudo neste diretório</span><br><span class="line">*</span><br><span class="line"># Exceto este arquivo</span><br><span class="line">!.gitignore</span><br></pre></td></tr></table></figure>
+<p>Nessa última alternativa, ninguém nunca irá conseguir gravar um arquivo nessa pasta! A não ser que o <code>.gitignore</code> seja apagado, posteriormente. Isso pois o git irá ignorar todos os arquivos ali dentro, com exceção do <code>.gitignore</code>.</p>
+<p>Dada essas duas soluções, eu encerro aqui. Espero que essa dica seja útil. E se tiverem dúvidas, ou quiserem compartilhar alguma experiência própria, podem escrever aqui nos comentários.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://possatti.com.br/git-pro-tip-diretorios-vazios/" data-id="cipzurtud000887reqos4c5md" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>seguir:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="https://plus.google.com/+LucasPossatti" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/possatti" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/zettajs/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">novos</strong>
+        <p class="article-nav-title">
+        
+            ZettaJS
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/jekyll/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antigos</strong>
+        <p class="article-nav-title">Jekyll</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recentes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/zettajs/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/zetta-logo.svg)" alt="ZettaJS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/zettajs/" class="title">ZettaJS</a></p>
+                            <p class="item-date"><time datetime="2015-03-31T04:11:36.000Z" itemprop="datePublished">31/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/git-pro-tip-diretorios-vazios/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git-logo.png)" alt="Git Pro Tip: Diretórios vazios" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/git-pro-tip-diretorios-vazios/" class="title">Git Pro Tip: Diretórios vazios</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/jekyll/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/jekyll-logo.png)" alt="Jekyll" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/jekyll/" class="title">Jekyll</a></p>
+                            <p class="item-date"><time datetime="2014-08-22T10:27:29.000Z" itemprop="datePublished">22/08/2014</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">arquivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">Março 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">Agosto 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/">IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protip/">protip</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IoT/" style="font-size: 10px;">IoT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a> <a href="/tags/protip/" style="font-size: 10px;">protip</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Lucas Possatti</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'possatti';
+    
+    
+    var disqus_url = 'http://possatti.com.br/git-pro-tip-diretorios-vazios/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

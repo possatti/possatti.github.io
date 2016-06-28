@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>ZettaJS | Lucas Possatti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,IoT" />
+    
+    <meta name="description" content="Introdução a internet das coisas, e exemplo de aplicação utilizando o Zetta.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZettaJS">
+<meta property="og:url" content="http://possatti.com.br/zettajs/index.html">
+<meta property="og:site_name" content="Lucas Possatti">
+<meta property="og:description" content="Introdução a internet das coisas, e exemplo de aplicação utilizando o Zetta.">
+<meta property="og:image" content="http://possatti.com.br/images/zetta-logo.svg">
+<meta property="og:updated_time" content="2016-06-24T22:25:13.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZettaJS">
+<meta name="twitter:description" content="Introdução a internet das coisas, e exemplo de aplicação utilizando o Zetta.">
+<meta name="twitter:image" content="http://possatti.com.br/images/zetta-logo.svg">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/logo-black.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60892717-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">Sobre</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Busca"><input type="hidden" name="sitesearch" value="http://possatti.com.br"></form>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    sem categoria
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-zettajs" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ZettaJS
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/zettajs/" class="article-date">
+    <time datetime="2015-03-31T04:11:36.000Z" itemprop="datePublished">31/03/2015</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IoT/">IoT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/zetta-logo.svg" alt=""></p>
+<p>Recentemente fiz um trabalho, na faculdade, sobre Internet das Coisas. Para esse trabalho eu tive de escrever um documento explicando sobre o assunto, e também o Zetta, que é uma plataforma para a Internet das Coisas. Além de desenvolver uma pequena aplicação que ilustrasse o tema. Então resolvi aproveitar para escrever um post sobre isso.</p>
+<p>A maior parte do que eu escrevi aqui, já era parte do meu trabalho. Mas eu aperfeiçoei alguns trechos para que algumas coisas ficassem mais claras, e o texto ficasse mais fácil de acompanhar.</p>
+<p>Eu irei começar falando sobre Internet das Coisas, de forma geral. E em seguida vou apresentar o Zetta, explicando para que serve e quais os seus pontos fortes e fracos. E no final, demonstrarei como colocar em execução uma aplicação do Zetta que eu desenvolvi.</p>
+<h2 id="Introducao-a-Internet-das-Coisas"><a href="#Introducao-a-Internet-das-Coisas" class="headerlink" title="Introdução a Internet das Coisas"></a>Introdução a Internet das Coisas</h2><p>Um conceito que tem ganhado popularidade mais recentemente é o de <a href="http://pt.wikipedia.org/wiki/Internet_das_Coisas" target="_blank" rel="external">Internet das Coisas</a> (IoT, da sigla em inglês para “Internet of Things”). Esse conceito diz respeitos a objetos embarcados com dispositivos eletrônicos que podem se conectar através de uma rede e trocar informações entre si.</p>
+<p>Em Internet das Coisas, as “coisas” podem ser inúmeros tipos de dispositivos. Como equipamentos para monitoramento de batimentos cardíacos, luminosidade, velocidade, controladores, luzes, motores, veículos, e muitas outras coisas. Esses dispositivos tem a capacidade de coletar informações úteis e deixá-las fluir entre os outros dispositivos conectados, de forma autônoma. Tudo isso ficará mais claro ao executar a aplicação que desenvolvi.</p>
+<p>Para a aplicação do conceito de IoT, existem muitas plataformas e ferramentas. Como, por exemplo: Carriots, Xively, ZettaJS, ThingSpeak, Zatar e muitas outras. Mas aqui eu irei tratar apenas do Zetta.</p>
+<h2 id="Sobre-o-Zetta"><a href="#Sobre-o-Zetta" class="headerlink" title="Sobre o Zetta"></a>Sobre o Zetta</h2><p>O Zetta é uma plataforma Open Source construída em cima do <a href="https://nodejs.org/" target="_blank" rel="external">Node.js</a> para criar servidores para aplicação de Internet das Coisas. Tendo seu primeiro commit feito no dia 18 de abril de 2014 em seu <a href="https://github.com/zettajs/zetta/" target="_blank" rel="external">repositório oficial</a>, o Zetta é uma plataforma relativamente nova, mas em constante desenvolvimento. Em sua <a href="http://www.zettajs.org/" target="_blank" rel="external">página principal</a>, o Zetta declara utilizar uma API <a href="http://pt.wikipedia.org/wiki/REST" target="_blank" rel="external">RESTful</a>, <a href="http://pt.wikipedia.org/wiki/WebSocket" target="_blank" rel="external">WebSockets</a> e <a href="http://en.wikipedia.org/wiki/Reactive_programming" target="_blank" rel="external">Programação Reativa</a> para conectar diversos dispositivos e proporcionar a criação de aplicações com intensa manipulação de dados, em tempo real.</p>
+<p>Como eu disse, o Zetta funciona em cima do Node.js (ou apenas Node), que é uma plataforma construída usando o V8, o Runtime de JavaScript do Google Chrome. O Node é útil para construir servidores web de forma rápida e fácil. E a linguagem JavaScript é utilizada para a programação.</p>
+<p>É possível executar um servidor Zetta em uma variedade de dispositivos, desde um PC qualquer, até um Arduíno, ou um Raspberry Pi. Assim o servidor pode se comunicar com diversos equipamentos conectados, como LEDs, sensores, telas e basicamente tudo com o qual o seu dispositivo puder se comunicar.</p>
+<p>Os desenvolvedores do Zetta, desenvolveram também o Zetta Browser. Que é uma aplicação web que pode ser utilizada para navegar através da API do Zetta. Assim, é possível apontá-lo para o endereço de um servidor Zetta e visualizar em tempo real todos os dados sendo coletados por aquele servidor. Bem como interagir com os dispositivos conectados a ele. Isso tudo em uma interface agradável e intuitiva. Contudo, o browser é um pouco instável, e as vezes apresenta algumas falhas. Mas, no geral, é uma ferramenta muito útil.</p>
+<p>O Zetta objetiva proporcionar uma maneira fácil e rápida de projetar aplicações para a Internet das Coisas. E proporcionando flexibilidade para controlar detalhes da aplicação.</p>
+<p>Porém um dos seus pontos fracos está na sua data de origem. Tendo surgido por volta do início de 2014, é de se esperar que não seja uma plataforma muito madura ainda. Ao navegar pelo site oficial, é fácil perceber pontos em que falta documentação, ou links que te levam a artigos completamente vazios. Ainda assim, a documentação no site é suficiente para iniciar o aprendizado. Porém, provavelmente chegará uma hora em que você sentirá falta de algumas informações, assim como eu senti.</p>
+<p>Ainda assim, o Zetta aparenta ser uma plataforma simples, robusta e estável. É possível utilizá-lo para realizar uma enormidade de projetos. E é uma ótima escolha para aqueles que estão iniciando com a Internet das Coisas, ou apenas querem matar a curiosidade.</p>
+<p>Outra vantagem para o Zetta é que, diferente de muitas plataformas com propósitos puramente comerciais, esse é um projeto Open Source (utilizando a licensa MIT) e sem fins comerciais (apesar de que você pode, sim, usá-lo para criar aplicações comerciais). E é um projeto que está em constante desenvolvimento.</p>
+<p>Mas a falta de uma grande empresa por trás do Zetta pode dificultar o seu uso em aplicações de larga escala. Por falta, por exemplo, de um suporte dedicado exclusivamente a atender seus clientes e a falta de garantia de funcionamento.</p>
+<h2 id="Arquitetura-do-Zetta"><a href="#Arquitetura-do-Zetta" class="headerlink" title="Arquitetura do Zetta"></a>Arquitetura do Zetta</h2><p>A arquitetura de uma aplicação Zetta é basicamente a seguinte: existe um servidor Zetta central executando na nuvem (no Heroku, por exemplo), que está conectado a alguns Hubs (como um Raspberry Pi ou um Beaglebone) que rodam instâncias locais de um servidor Zetta. Esses Hubs por sua vez estão conectados a equipamentos eletrônicos e sensores (como exemplo, uma célula fotovoltaica e uma LED). Vejam isso ilustrado na <strong>INCRÍVEL</strong> figura que eu fiz:</p>
+<p><img src="/images/arquitetura-do-zetta.jpg" alt="Arquitetura do Zetta"></p>
+<p>Dessa maneira, dados são obtidos dos diversos equipamentos e sensores e levados aos servidores dos hubs, que os encaminha ao servidor central. Isso funciona de forma geo-distribuída, então é possível que, por exemplo, um sensor fotovoltaico lá no japão faça com que uma lâmpada acenda aqui no Brasil.</p>
+<p>Essa lógica, de como as coisas acontecem e em função do quê, está toda nos servidores, podendo estar até mesmo distribuída entre os hubs e o servidor central.</p>
+<h2 id="Demonstracao"><a href="#Demonstracao" class="headerlink" title="Demonstração"></a>Demonstração</h2><p>Para exemplificar o uso do Zetta, eu desenvolvi uma aplicação simples, baseada no <a href="http://www.zettajs.org/projects/2014/10/13/Hello-World.html" target="_blank" rel="external">tutorial para iniciantes</a> disponível no site oficial. E adicionalmente, incrementei com uma funcionalidade a mais (controlar o player do meu PC), para exemplificar a criação de drivers.</p>
+<p>O exemplo disponibilizado no site ensina a criar um servidor local que irá servir para ilustrar uma aplicação que controla a luminosidade de um local. No exemplo é utilizado uma mock LED juntamente com uma mock photocell (célula voltaica), de maneira que quando a photocell detecta uma baixa luminosidade, a LED acende. E quando a photocell detecta elevada luminosidade, a LED apaga.</p>
+<p>Para aqueles que não estão familiarizados com o termo, “mock” nesse contexto, quer dizer que não há hardware sendo utilizado. Nem para a photocell, e nem para a LED. Os drivers utilizados procuram simular os comportamentos desses dispositivos. Por isso, é necessário apenas um computador para executar o projeto e ver tudo funcionando.</p>
+<p>Apesar do exemplo, parecer algo simples demais, este exemplo serve bem para ilustrar uma possível aplicação na vida real. Para fazer algo mais útil, você poderia colocar uma célula voltaica verdadeira no telhado da sua casa, e no lugar de uma LED, você usaria algumas lâmpadas da sua casa. Dessa forma, quando a noite chegasse, as lâmpadas da sua casa acenderiam automaticamente. E quando o dia chegasse, elas apagariam, sem a necessidade de qualquer intervenção.</p>
+<p>Se você fosse utilizar um dispositivo real qualquer, conectado ao seu hub, então você precisaria de um driver específico que fizesse a comunicação entre o servidor local e o dispositivo. Há uma variedade de drivers já criados para vários dispositivos e plataformas diferentes. Mas se você não encontrar um que atenda sua necessidade, poderá desenvolver o seu próprio. No projeto que eu desenvolvi, eu exemplifiquei a criação de um driver simples. Porém dependendo da sua necessidade, um pouco de conhecimento de eletrônica poderá ser necessário. Algo que eu não sei, e não tenho como ensinar.</p>
+<p>No projeto, além da funcionalidade básica de controle de luminosidade, eu desenvolvi um driver que pudesse controlar o player de mídia do meu computador (o <a href="http://banshee.fm/" target="_blank" rel="external">Banshee</a>). Infelizmente, devido a forma como eu desenvolvi o driver, essa última parte irá funcionar apenas em sistemas operacionais Linux. E que tenham o Banshee instalado… é claro!</p>
+<p>O driver permite pausar a reprodução e voltar a reproduzir a faixa atual. Além de permitir pular para a próxima faixa ou voltar a anterior.</p>
+<p>Imaginando o contexto de Internet das Coisas, podemos imaginar várias aplicações. A minha localização poderia ser monitorada pelo GPS do meu celular, por exemplo. E quando eu estivesse voltando do trabalho, ao chegar próximo de casa, uma música poderia começar a tocar automaticamente em casa. E da mesma forma, parasse quando eu estivesse saindo.</p>
+<h2 id="Execucao-do-projeto"><a href="#Execucao-do-projeto" class="headerlink" title="Execução do projeto"></a>Execução do projeto</h2><p>Todo o <a href="https://github.com/possatti/sample-zettajs-server/" target="_blank" rel="external">código da aplicação</a> está hospedado no github. E também o <a href="https://github.com/possatti/zetta-banshee-driver" target="_blank" rel="external">driver para o Banshee</a>. Para executar o projeto, entre com os comandos abaixo na sua linha de comando. Você precisará instalar no seu computador o <a href="https://nodejs.org/" target="_blank" rel="external">Node</a> e o <a href="https://www.npmjs.com/" target="_blank" rel="external">NPM</a> (que geralmente já vem com o Node).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Clone o projeto</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/possatti/sample-zettajs-server.git</span><br><span class="line"><span class="comment"># Entre no diretório baixado</span></span><br><span class="line">$ <span class="built_in">cd</span> sample-zettajs-server</span><br><span class="line"><span class="comment"># Instale as dependências necessárias (inclusive o driver</span></span><br><span class="line"><span class="comment"># para o banshee)</span></span><br><span class="line">$ npm install</span><br><span class="line"><span class="comment"># Inicie o servidor:</span></span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure>
+<p>Se você não tiver o git instalado em seu computador. Não há problema. Você pode baixar o <a href="https://github.com/possatti/sample-zettajs-server/archive/v0.1.zip" target="_blank" rel="external">projeto no github</a> e continuar com <code>npm install</code> e <code>npm start</code>.</p>
+<p>Com isso, o servidor irá iniciar em localhost, na porta 1337, por padrão. E você, de imediato, irá notar, no log da linha de comando, que a LED está acendendo e apagando toda hora. Isso está correto, a célula fotovoltaica está ocasionando esse comportamento.</p>
+<p>Para visualizar tudo o que está acontecendo, eu recomendo o uso do Zetta Browser. Para abrir o Zetta Browser apontando para o seu servidor local (127.0.0.1:1337), entre com o seguinte endereço no seu navegador:</p>
+<p><a href="http://browser.zettajs.io/#/overview?url=http://127.0.0.1:1337" target="_blank" rel="external">http://browser.zettajs.io/#/overview?url=http://127.0.0.1:1337</a></p>
+<p>Mas lembre que isso que você está visualizando é tudo local, apenas. Para realmente ser capaz de acessar este hub através da internet, o servidor local precisa se conectar a um servidor na nuvem. Coisa que esse projeto já está configurado para fazer. Ao ter iniciado o servidor local, ele automaticamente já se conectou ao servidor em hello-zetta.herokuapp.com (isto está configurado no código do projeto). Este servidor do <a href="https://heroku.com/" target="_blank" rel="external">Heroku</a> é disponibilizado pela equipe desenvolvedora do Zetta, para que iniciantes possam usá-lo. Então qualquer um pode criar sua aplicação e se conectar a ele.</p>
+<p>Para acessar a API do servidor local através da internet, use o Zetta Browser apontando para o servidor do Heroku:</p>
+<p><a href="http://browser.zettajs.io/#/overview?url=http://hello-zetta.herokuapp.com" target="_blank" rel="external">http://browser.zettajs.io/#/overview?url=http://hello-zetta.herokuapp.com</a></p>
+<p>Com essa URL, você poderá usar o seu celular, por exemplo, para visualizar a LED e a photocell. Além de poder interagir com o Banshee, se você o tiver instalado.</p>
+<p>Mas, por favor, tenha em mente, que como esta é apenas uma aplicação de demonstração, nenhuma etapa de autenticação é feita. Isto quer dizer que qualquer pessoa em qualquer parte do mundo pode acessar a API que o seu servidor local está provendo. Apesar de que isso não é tão alarmante, pois as únicas coisas que eles podem fazer é controlar a mock LED e o Banshee no seu computador.</p>
+<h2 id="E-agora"><a href="#E-agora" class="headerlink" title="E agora?"></a>E agora?</h2><p>Para aprender mais, você pode continuar interagindo com o servidor, e investigar o código, para ver como o projeto funciona. Conhecimentos de NodeJS e JavaScript com certeza irão lhe ajudar. Para aprender mais sobre o Zetta, um bom ponto de partida é o seu próprio <a href="http://www.zettajs.org/" target="_blank" rel="external">site</a>, apesar de que, como eu disse, a documentação do projeto falha em alguns pontos.</p>
+<p>E se estiver interessado, você pode tentar construir sua própria aplicação, segundo uma necessidade ou um desejo que você tem. Comesse com algo simples e vá aperfeiçoando a medida que desejar.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://possatti.com.br/zettajs/" data-id="cipzurtum000a87re96eztga7" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>seguir:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="https://plus.google.com/+LucasPossatti" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/possatti" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/git-pro-tip-diretorios-vazios/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antigos</strong>
+        <p class="article-nav-title">Git Pro Tip: Diretórios vazios</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recentes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/zettajs/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/zetta-logo.svg)" alt="ZettaJS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/zettajs/" class="title">ZettaJS</a></p>
+                            <p class="item-date"><time datetime="2015-03-31T04:11:36.000Z" itemprop="datePublished">31/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/git-pro-tip-diretorios-vazios/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git-logo.png)" alt="Git Pro Tip: Diretórios vazios" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/git-pro-tip-diretorios-vazios/" class="title">Git Pro Tip: Diretórios vazios</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/jekyll/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/jekyll-logo.png)" alt="Jekyll" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/jekyll/" class="title">Jekyll</a></p>
+                            <p class="item-date"><time datetime="2014-08-22T10:27:29.000Z" itemprop="datePublished">22/08/2014</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">arquivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">Março 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">Agosto 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/">IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protip/">protip</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IoT/" style="font-size: 10px;">IoT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a> <a href="/tags/protip/" style="font-size: 10px;">protip</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Lucas Possatti</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'possatti';
+    
+    
+    var disqus_url = 'http://possatti.com.br/zettajs/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
