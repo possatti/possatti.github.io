@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Tutorial de Shell Script | Lucas Possatti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="shell script" />
+    
+    <meta name="description" content="Neste post eu explico sobre várias estruturas usadas em shell script como: loops, condicionais, pipes, redireção, globs, substituição de comandos e mais.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tutorial de Shell Script">
+<meta property="og:url" content="http://possatti.com.br/shell-script/index.html">
+<meta property="og:site_name" content="Lucas Possatti">
+<meta property="og:description" content="Neste post eu explico sobre várias estruturas usadas em shell script como: loops, condicionais, pipes, redireção, globs, substituição de comandos e mais.">
+<meta property="og:image" content="http://possatti.com.br/images/sh.png">
+<meta property="og:updated_time" content="2016-06-30T15:47:41.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tutorial de Shell Script">
+<meta name="twitter:description" content="Neste post eu explico sobre várias estruturas usadas em shell script como: loops, condicionais, pipes, redireção, globs, substituição de comandos e mais.">
+<meta name="twitter:image" content="http://possatti.com.br/images/sh.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/logo-black.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60892717-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">Sobre</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Busca"><input type="hidden" name="sitesearch" value="http://possatti.com.br"></form>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    sem categoria
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-shell-script" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Tutorial de Shell Script
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/shell-script/" class="article-date">
+    <time datetime="2016-06-30T15:41:53.000Z" itemprop="datePublished">30/06/2016</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell-script/">shell script</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>Neste post vou explicar um pouco de tudo o que eu sei sobre shell script. Eu comecei a usar shell script porque eu queria automatizar algumas tarefas minhas. E meu gosto pela linguagem começou pela minha fascinação. Eu lia alguns scripts, mas não entendia nada! Além disso eu percebia o potencial da linguagem, as coisas que eu poderia criar com aquilo.</p>
+<p>Shell script é uma linguagem com uma sintaxe extranhíssima e muito diferente de qualquer outra linguagem que eu conhecia antes. Eu tinha experiência com linguagens como Python, Java, um pouco de C e outras. E estudando shell script eu aprendi muita coisa que eu não conhecia, e que pode ser aplicado em outras linguagens. Então depois de estudar, sinto que conheço mais sobre programação de forma geral. Estudar shell script também me permitiu conhecer melhor como funciona a arquitetura de programas e processos do Linux. Antes disso, eu não sabia o que era <code>stdout</code> e <code>stdin</code> por exemplo. E hoje eu percebo que esse é um conhecimento bem útil e que eu não tinha antes.</p>
+<p>Apesar da sintaxe estranha, shell script é uma linguagem forte e capaz de muita coisa. Imagine o seguinte. Em seu computador você tem programas de todos os tipos. Alguns escritos em C, outros que foram escritos em Python, Java, Perl e etc. Agora imagine utilizar o poder de cada programa desses em coletivo para construir algo maior. É isso que você vai fazer. Usando shell script você irá orquestrar chamadas a esses programas, para cumprir um objetivo específico. Uau, isso é poderoso. É claro que você pode fazer isso em qualquer linguagem, mas shell script foi feito para isso!</p>
+<p>Se você se interessou até aqui, continue lendo. Garanto que você vai aprender algo interessante. Porém, antes de começar, algumas sugestões:</p>
+<ul>
+<li>Se você nunca aprendeu programação antes, te sugiro fortemente, e <em>enfáticamente</em> que você não comece por shell script. Aprenda Python, C/C++, Java, PHP ou qualquer outra linguagem e depois volte aqui. Sério!</li>
+<li>E para seguir com o que eu vou explicar aqui, você deve estar um pouco acostumado a usar o terminal. Do contrário você vai ter um pouco de dificuldade.</li>
+</ul>
+<p>Você irá perceber que muitas vezes eu vou ser breve e sucinto em certos assuntos. Principalmente aqueles que você provavelmente já viu em outras linguagens de programação. Outras vezes será porque não tive tempo de expandir e escrever da melhor forma possível. Se você perceber que eu não abordei algo importante, ou se algum dos exemplos está errado, ou se tem qualquer outra sugestão, por favor, deixe um comentário.</p>
+<p>Vamos começar.</p>
+<h2 id="Sumario"><a href="#Sumario" class="headerlink" title="Sumário"></a>Sumário</h2><ul>
+<li><a href="#Diferentes-Shells">Diferentes Shells</a></li>
+<li><a href="#Hello-World">Hello World</a></li>
+<li><a href="#O-básico">O básico</a><ul>
+<li><a href="#Shebang">Shebang (#!)</a></li>
+<li><a href="#Comandos-uteis">Comandos úteis</a></li>
+<li><a href="#Manuais">Manuais</a></li>
+<li><a href="#Wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li><a href="#Variáveis">Variáveis</a></li>
+<li><a href="#Substituicao-de-comandos">Substituição de comandos</a></li>
+<li><a href="#Condicionais">Condicionais</a></li>
+<li><a href="#Switch-case">Switch case</a></li>
+<li><a href="#Argumentos">Argumentos</a></li>
+<li><a href="#Loops">Loops</a><ul>
+<li><a href="#For">For</a></li>
+<li><a href="#While">While</a></li>
+</ul>
+</li>
+<li><a href="#Pipe-e-redirecao">Pipe e redireção</a></li>
+<li><a href="#Funcoes">Funções</a></li>
+<li><a href="#Matematica">Matemática</a></li>
+<li><a href="#Manipulacao-de-texto">Manipulação de texto</a></li>
+</ul>
+<h2 id="Diferentes-Shells"><a href="#Diferentes-Shells" class="headerlink" title="Diferentes Shells"></a>Diferentes Shells</h2><p>Existem muitas <a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank" rel="external">Shells</a> diferentes. Muitas mesmo! E cada uma delas tem uma linguagem de script diferente. Apesar disso a maioria das Shells apresentam algum nível de compatibilidade com a <a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="external">Bourne Shell</a> (<code>sh</code>), que foi uma das primeiras a existir. Algumas das Shells mais usadas são:</p>
+<ul>
+<li>sh (<a href="https://en.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="external">Bourne shell</a>)</li>
+<li>bash (<a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="external">Bourne-Again shell</a>)</li>
+<li>dash (<a href="https://en.wikipedia.org/wiki/Almquist_shell" target="_blank" rel="external">Debian Almquist shell</a>)</li>
+<li>fish (<a href="https://en.wikipedia.org/wiki/Friendly_interactive_shell" target="_blank" rel="external">friendly interactive shell</a>. minha favorita)</li>
+<li>zsh (<a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="external">Z shell</a>. Muita gente gosta dessa para usar no dia-a-dia)</li>
+<li>ksh (<a href="https://en.wikipedia.org/wiki/Korn_shell" target="_blank" rel="external">Korn shell</a>)</li>
+<li>csh (<a href="https://en.wikipedia.org/wiki/C_shell" target="_blank" rel="external">C shell</a>)</li>
+<li>… ad infinitum.</li>
+</ul>
+<p>A Shell mais popular provavelmente é o Bash. Se você usa Ubuntu e não sabe qual é a sua Shell, ela provavelmente é o Bash. Ainda assim, algumas pessoas preferem outras Shells para usar interativamente. Eu prefiro o Fish, por exemplo, e conheço muitas pessoas que preferem utilizar o Zsh.</p>
+<p>Apesar de todas as variações, a maioria delas possuem um subconjunto de operações e de sintáxe iguais ao do <code>sh</code>. Por isso vou ensinar <code>sh</code> puro aqui. Variações como o <code>bash</code> adicionam algumas coisas legais à linguagem, mas que não são compatíveis com as outras shells. Se você se restringir a <code>sh</code> puro, seu código vai funcionar na maioria das outras shells. (Não todas. O <code>fish</code>, por exemplo, não é compatível. Já sofri muito com isso. T.T)</p>
+<p>No Ubuntu, quando você usa o <code>sh</code>, na verdade você está usando o <code>dash</code>. Mas… Whatever. O <code>dash</code> foi feito apenas para ser um versão mais rápida e leve da Bourne Shell, e é totalmente compatível com a Bourne shell (até onde eu sei).</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>Se você nunca mexeu com shell script antes, me acompanhe para fazer um Hello World. Abra o terminal (<code>Ctrl+Shift+T</code>), e use seu editor de texto favorito para criar um novo arquivo arquivo de texto. Aqui eu vou usar o <code>nano</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nano script.sh  <span class="comment"># Nano é um editor de texto, use qualquer um que você prefira</span></span><br></pre></td></tr></table></figure>
+<p>Usando seu editor de texto, digite o seguinte código:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> Hello World</span><br></pre></td></tr></table></figure>
+<p>A primeira linha é um shebang (<code>#!</code>) e identifica o tipo de script que estamos criando, vou explicar melhor sobre o shebang depois. E na segunda linha, <code>echo</code> irá imprimir “Hello World”. Agora, salve e feche o editor de texto. (No nano você usa <code>Ctrl+O</code> (letra Ó) para salvar, e <code>Ctrl+X</code> para sair.) Depois, digite o comando seguinte no mesmo terminal e você verá o <code>Hello World</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sh script.sh</span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+<p><em>Voilà</em>! Agora você já sabe como criar e executar um shell script. Você já pode pegar seu certificado de “Shell Script Noob” na recepção e ir embora, ou continuar com o resto do guia para ganhar o certificado de “Shell Script Master”. ;)</p>
+<h2 id="O-basico"><a href="#O-basico" class="headerlink" title="O básico"></a>O básico</h2><p>No seu uso mais básico, shell script é usado para executar um comando após o outro. Igual que você estivesse usando o terminal, e digitando um comando após o outro. Mas colocando esses comandos em um script, você pode automatizar suas tarefas.</p>
+<p>Por exemplo, depois de formatar meu computador eu tenho <a href="https://github.com/possatti/my-setup-scripts" target="_blank" rel="external">vários scripts</a> que instalam algumas coisas que eu costumo usar no dia-a-dia, exemplo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">sudo apt-get -y install git</span><br><span class="line">sudo apt-get -y install python-pip</span><br><span class="line">sudo apt-get -y install fish</span><br><span class="line">sudo apt-get -y install guake</span><br><span class="line">sudo apt-get -y install htop</span><br><span class="line">sudo apt-get -y install tree</span><br><span class="line">sudo apt-get -y install transmission</span><br><span class="line">sudo apt-get -y install texlive-latex-base</span><br></pre></td></tr></table></figure>
+<p>Quando eu executar o script acima, todos esses programas serão instalados pelo <code>apt-get</code>. Isso me poupa o trabalho de ter que me lembrar e de ter que digitar manualmente cada um desses comandos.</p>
+<p>Você também pode executar mais de um comando na mesma linha, separando os comandos por <code>;</code>. O <code>;</code> é opcional no final de uma linha.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">"Hello"</span>; <span class="built_in">echo</span> -n <span class="string">"World"</span>; <span class="built_in">echo</span> <span class="string">"!"</span>;</span><br></pre></td></tr></table></figure>
+<p>E a indentação também não importa.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">"Hello"</span></span><br><span class="line">	<span class="built_in">echo</span> -n <span class="string">"World"</span></span><br><span class="line">		<span class="built_in">echo</span> -n <span class="string">"!"</span></span><br></pre></td></tr></table></figure>
+<p>Mas, por favor, indente seu código de forma intuitiva e organizada. Não é só porque você está usando a linguagem mais feia já inventada que você precisa escrever o código mais feio já inventado.</p>
+<h3 id="Shebang"><a href="#Shebang" class="headerlink" title="Shebang (#!)"></a>Shebang (#!)</h3><p>No linux, é muito comum você colocar um <a href="https://pt.wikipedia.org/wiki/Shebang" target="_blank" rel="external">shebang</a> na primeira linha de um script. Ele serve para que seu computador identifique qual programa roda aquele script. Ele só funciona se for a primeira linha do arquivo. Aqui estão alguns exemplos:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#!/usr/bin/ruby</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br></pre></td></tr></table></figure>
+<p>Agora você já percebeu que ele toma o formato <code>#!</code> + <code>&lt;executável&gt;</code>. Sendo que o executável é o programa que vai rodar o seu script. Se você não colocar um shebang no seu script, você vai precisar de executar ele da seguinte forma:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh script.sh</span><br></pre></td></tr></table></figure>
+<p>Se você colocar o devido shebang você pode fazer:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x script.sh <span class="comment"># Apenas da primeira vez, para transformar o arquivo em executável</span></span><br><span class="line">$ ./script.sh <span class="comment"># Se você estiver no mesmo diretório que o script</span></span><br><span class="line">$ script.sh <span class="comment"># Se o script estiver no seu $PATH</span></span><br></pre></td></tr></table></figure>
+<p>Eu costumo colocar o shebang e rodar o script com <code>sh script.sh</code> mesmo, porque ficar fazendo <code>chmod +x</code> para cada script que eu crio é muito enjoado. Mas é uma boa prática colocar o shebang, então não deixe de colocar.</p>
+<h3 id="Comandos-uteis"><a href="#Comandos-uteis" class="headerlink" title="Comandos úteis"></a>Comandos úteis</h3><p>Alguns comandos você irá usar com mais frequência do que outros. É importante que você saiba que alguns deles existam, para consultá-los quando você precisar. Alguns deles são:</p>
+<ul>
+<li><code>ls</code>: Lista os arquivos do diretório atual.</li>
+<li><code>cd</code>: Troca o diretório atual.</li>
+<li><code>rm</code>: Apaga um arquivo ou diretório.</li>
+<li><code>mv</code>: Move um arquivo ou diretório.</li>
+<li><code>cp</code>: Copia um arquivo ou diretório.</li>
+<li><code>echo</code>: Escreve um texto na tela.</li>
+<li><code>test</code>: Veremos na parte de condicionais.</li>
+<li><code>grep</code>: Imprime linhas que correspondem à um padrão.</li>
+<li><code>sed</code>: Modifica e filtra texto.</li>
+<li><code>tr</code>: Troca ou deleta caracteres.</li>
+<li><code>read</code>: Lê um texto digitado pelo usuário e salva numa variável.</li>
+<li><code>pwd</code>: Imprime o diretório local.</li>
+<li><code>find</code>: Busca arquivos.</li>
+</ul>
+<h3 id="Manuais"><a href="#Manuais" class="headerlink" title="Manuais"></a>Manuais</h3><p>Quando você tiver dúvida sobre como um comando funciona, ou qual a sua interface, você deveria consultar sua página no manual: <code>man &lt;comando&gt;</code>. Por exemplo, estou com dúvida no <code>ls</code>, então eu digito <code>man ls</code>.</p>
+<p><strong>Você deve se acostumar a ler os manuais</strong>. Acostume-se a encontrar os subcomandos existentes e as opções (e.g. <code>--opcao</code>) que você precisa. E busque compreender mais ou menos a seção <code>SYNOPSIS</code> das páginas dos manuais.</p>
+<p>E tenha em mente que as páginas dos manuais podem ser diferentes dependendo da shell que você está usando. A maioria dos programas é a mesma coisa, porém comandos mais básicos como <code>echo</code> e <code>ls</code> comumente funcionam um pouco diferente dependendo da shell. Eu uso o <code>fish</code> diáriamente, e, quando estou fazendo um script, vez ou outra, tenho que entrar no <code>bash</code> só para consultar o manual de algum comando. Isso já me deu dor de cabeça algumas vezes. Se você usa o <code>bash</code>, você não deve ter muitos problemas com isso, mas fica esperto.</p>
+<h3 id="Wildcards-Globs"><a href="#Wildcards-Globs" class="headerlink" title="Wildcards (Globs)"></a>Wildcards (Globs)</h3><p><a href="https://en.wikipedia.org/wiki/Glob_%28programming%29" target="_blank" rel="external"><em>Globs</em></a> são um tipo de <a href="https://en.wikipedia.org/wiki/Wildcard_character" target="_blank" rel="external"><em>Wildcard</em></a> usados para selecionar arquivos em sistemas Unix. São caracteres que representam uma sequência genérica de caracteres. <code>?</code> representa qualquer caractere. E <code>*</code>, qualquer quantidade de qualquer caractere.</p>
+<p>Vamos supor que você tem um diretório com os seguintes arquivos: <code>script.pl</code>, <code>script.sh</code>, <code>script.pl</code>, <code>script.test.sh</code>, <code>test.c</code> e <code>test.java</code>. Se você entrar nesse diretório e usar o comando <code>rm test.*</code>, você irá remover os arquivos <code>test.c</code> e <code>test.java</code>, mas os outros arquivos ficaram intactos.</p>
+<p>Isso funciona por uma expansão que ocorre antes mesmo do programa ser executado. No caso anterior, <code>rm test.*</code> será expandido para <code>rm test.c test.java</code>, e então o programa é invocado com estes dois argumentos.</p>
+<p>Outro exemplo. Se usamos o comando <code>mv *.txt textfiles/</code> moveremos todos os arquivos com a extensão <code>.txt</code> para o diretório <code>textfiles/</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm script.*  <span class="comment"># Apaga arquivos tipo: 'script.py', 'script.sh', 'script.pl', e etc.</span></span><br><span class="line">rm <span class="string">"script.*"</span>  <span class="comment"># Globs não funcionam dentro de aspas.</span></span><br><span class="line">rm <span class="variable">$HOME</span>/fotos/viagem/*-2015-01-??.jpg  <span class="comment"># Remove as fotos de janeiro de 2015.</span></span><br><span class="line">rm <span class="variable">$HOME</span>/fotos/viagem/*.jpg  <span class="comment"># Remove todas as fotos da viagem.</span></span><br></pre></td></tr></table></figure>
+<p><em>Globs</em> são muito úteis, e você deveria aprender a usar bem, pelo menos, o <code>*</code>.</p>
+<h2 id="Variaveis"><a href="#Variaveis" class="headerlink" title="Variáveis"></a>Variáveis</h2><p>Chega daquelas discussões sobre o que é melhor: tipagem forte, ou tipagem fraca. Ao contrário da maioria das linguagens de programação, em que você tem vários tipos de variáveis (integer, string, boolean, etc), em shell script você tem apenas um tipo de variável… Strings!</p>
+<p>Criar uma variável é bem simples:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variavel=<span class="string">"Conteúdo da variável"</span></span><br></pre></td></tr></table></figure>
+<p><strong>Importante:</strong> não coloque espaço ao redor do <code>=</code>; não comece com números; não use hífen <code>-</code>; não use caracteres especiais como <code>ç</code>, <code>á</code>, <code>火災</code> e nem emojis <code>😀</code>, <code>😂</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Não use nomes que nem esses:</span></span><br><span class="line">98bottles=<span class="string">"98"</span>  <span class="comment"># Não comece com números.</span></span><br><span class="line">bad-variable=<span class="string">"crap"</span>  <span class="comment"># Não use hífen '-'.</span></span><br><span class="line">erro = <span class="string">"erro"</span>  <span class="comment"># Não coloque espaços ao redor do '='.</span></span><br><span class="line">maçã=<span class="string">"maca"</span>  <span class="comment"># Não use caracteres especiais nos nomes.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Use nomes que nem esses:</span></span><br><span class="line">bottles_n_98=98  <span class="comment"># As aspas são opcionais quando o conteúdo da variável não contém espaços.</span></span><br><span class="line">good_variable=<span class="string">"(y)"</span>  <span class="comment"># Use underline '_' como alternativa para o hífen '-'.</span></span><br><span class="line">CamelCase=<span class="string">"Camelo"</span>  <span class="comment"># Mau gosto, porém é permitido.</span></span><br><span class="line">maca=maçã-火災-😀  <span class="comment"># No conteúdo você pode usar caracteres especiais. 👍</span></span><br></pre></td></tr></table></figure>
+<p>Agora, na hora de usar as variáveis é que tem uma pegadinha. Você deve usar <code>$</code> para acessar o valor de qualquer variável. Então a variável <code>fruta=maçã</code> deve ser acessada como <code>$fruta</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">texto=<span class="string">"Hello World"</span></span><br><span class="line"><span class="built_in">echo</span> texto  <span class="comment"># Pegadinha. Vai imprimir "texto".</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$texto</span>  <span class="comment"># Vai imprimir "Hello World".</span></span><br></pre></td></tr></table></figure>
+<p>Quando você estiver escrevendo strings, você pode usar <code>&#39;</code> ou <code>&quot;</code>. Usando <code>&quot;</code> o valor das variáveis são colocados no lugar dos seus nomes. Usando <code>&#39;</code> o nome dá variável fica do jeito que tá na string. O <code>&#39;</code> ignora a existência de variáveis.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'$HOME'</span>  <span class="comment"># Imprime: $HOME</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$HOME</span>"</span>  <span class="comment"># Imprime, ex: /home/possatti</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"A home do usuário '<span class="variable">$USER</span>' é '<span class="variable">$HOME</span>'"</span> <span class="comment"># ex: A home do usuário 'possatti' é '/home/possatti'</span></span><br></pre></td></tr></table></figure>
+<p>Para ler uma variável do <code>stdin</code> (mais tarde eu explico sobre <em>File Descriptors</em>), ou seja, algum valor que o usuário tenha digitado, use o comando <code>read</code>. Exemplo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">"Digite seu nome: "</span></span><br><span class="line"><span class="built_in">read</span> nome</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Olá, <span class="variable">$nome</span>!"</span></span><br></pre></td></tr></table></figure>
+<p>Além das variáveis que você cria dentro do script, já existem algumas prontas para você usar. Nós chamamos elas de variáveis de ambiente (environment variables). Você pode abrir um terminal, digitar <code>$</code> e apertar tab duas vezes, e uma lista de variáveis vai aparecer para você. Algumas das mais úteis são: <code>$HOME</code>, <code>$HOSTNAME</code>, <code>$LANG</code>, <code>$RANDOM</code>, <code>$PWD</code>, <code>$PATH</code>, <code>$SHELL</code>, <code>$USER</code>, <code>$USERNAME</code>.</p>
+<p>Você também pode passar variáveis de ambiente temporárias para um script, invocando ele como <code>VARIAVEL1=whatever VARIAVEL2=whatever ./script.sh</code>.</p>
+<p>Também é uma convenção usar nomes de variáveis em letras maiúsculas. E geralmente é uma ótima ideia seguir as convenções. Mas você vai perceber que eu não tô nem aí pra essa convenção especificamente… kkk. Isso porque eu acho que escrever o nome das minhas variáveis em minúsculo diferencia elas melhor das variáveis de ambiente.</p>
+<h2 id="Substituicao-de-comandos"><a href="#Substituicao-de-comandos" class="headerlink" title="Substituição de comandos"></a>Substituição de comandos</h2><p>As vezes é útil guardarmos a saída de algum programa. Ao invés de imprimir na tela, gostaríamos de pegar esse valor e, por exemplo, guardar em uma variável. Para isso, usamos <a href="https://en.wikipedia.org/wiki/Command_substitution" target="_blank" rel="external">substituição de comandos</a>: <code>$(prog)</code>, ou <code>prog</code>. Até onde eu sei, não há diferença entre as duas formas. Eu, particularmente, prefiro o segundo.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> `<span class="built_in">pwd</span>`  <span class="comment"># Imprime o diretório atual</span></span><br><span class="line">arquivos_de_texto=$(ls *.txt)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$arquivos_de_texto</span>  <span class="comment"># Imprime todos os "txt" do diretório atual</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2 + 2 = <span class="variable">$(expr 2 + 2)</span>"</span>  <span class="comment"># Imprime '2 + 2 = 4'</span></span><br></pre></td></tr></table></figure>
+<h2 id="Condicionais"><a href="#Condicionais" class="headerlink" title="Condicionais"></a>Condicionais</h2><p>Esse é o <code>if</code> mais feio que você provavelmente vai escrever na sua vida. Mas vamos nessa.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">"Digite sua idade: "</span></span><br><span class="line"><span class="built_in">read</span> idade</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$idade</span> <span class="_">-lt</span> 18 ]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Você é menor de idade."</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Você é maior de idade."</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>Eu avisei.</p>
+<p>No script acima, o usuário digita sua idade. Se ele tiver menos que 18 anos, imprimimos que ele é menor de idade. Caso contrário, imprimimos que ele é maior de idade.</p>
+<p>Note que os espaços entre <code>[</code> e <code>]</code> são necessários. <strong>Não</strong> use <code>[$idade -lt 18]</code>, use <code>[ $idade -lt 18 ]</code>. Se você não colocar os espaços, você terá um erro.</p>
+<p>Agora vamos olhar como esse <code>if</code> funciona de verdade. Na Bourne Shell, quando escrevemos <code>[ $idade -lt 18 ]</code>, isso é a mesma coisa que <code>test $idade -lt 18</code>. Na verdade, verdade verdadeira, ele usa um comando para avaliar a nossa expressão. Os valores <code>$idade</code>, <code>-lt</code> e <code>18</code> estão sendo passados como argumentos para o programa <code>test</code>, e ele vai avaliar a expressão. Se a expressão for verdadeira, <code>test</code> termina a execução com o valor <code>0</code> (<code>exit 0</code>). Se a expressão for falsa, ele termina com um valor diferente (geralmente <code>1</code>).</p>
+<p>Agora que você já sabe que o comando <code>test</code> está sendo usado, você já pode consultar o manual para saber que tipos de condições você pode construir: <code>man test</code>. O <code>test</code> pode realizar vários tipos de comparações, aqui estão algumas operações possíveis.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> 42 <span class="_">-eq</span> 42 <span class="comment"># eq: equal = os inteiros são iguais</span></span><br><span class="line"><span class="built_in">test</span> 3 <span class="_">-gt</span> 2 <span class="comment"># gt: greater-than = maior-quê</span></span><br><span class="line"><span class="built_in">test</span> 3 -ge 2 <span class="comment"># ge: greater-than or iqual = maior ou igual</span></span><br><span class="line"><span class="built_in">test</span> 2 <span class="_">-lt</span> 3 <span class="comment"># lt: less-than = menor-quê</span></span><br><span class="line"><span class="built_in">test</span> 2 -le 3 <span class="comment"># le: less-than or iqual = menor ou igual</span></span><br><span class="line"><span class="built_in">test</span> 0 <span class="_">-ne</span> 1 <span class="comment"># ne: not-iqual = os inteiros não são iguais</span></span><br><span class="line"><span class="built_in">test</span> -n <span class="string">"Texto"</span>  <span class="comment"># n: String tem mais que zero caracteres</span></span><br><span class="line"><span class="built_in">test</span> -z <span class="string">""</span>  <span class="comment"># z: String tem zero carácteres</span></span><br><span class="line"><span class="built_in">test</span> <span class="string">"Goiaba"</span> == <span class="string">"Goiaba"</span> <span class="comment"># ==: As Strings são iguais</span></span><br><span class="line"><span class="built_in">test</span> <span class="string">"Goiaba"</span> != <span class="string">"Mamão"</span> <span class="comment"># ==: As Strings são diferentes</span></span><br><span class="line"><span class="built_in">test</span> <span class="_">-d</span> <span class="string">"/home"</span>  <span class="comment"># Verifica se o diretório existe</span></span><br><span class="line"><span class="built_in">test</span> <span class="_">-f</span> saci-pererê.txt  <span class="comment"># f: Arquivo existe</span></span><br></pre></td></tr></table></figure>
+<p>Podemos reescrever o condicional do código anterior usando o <code>test</code> explicitamente. Dá na mesma coisa:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> <span class="variable">$idade</span> <span class="_">-lt</span> 18; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Você é menor de idade."</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Você é maior de idade."</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>Todo comando que é executado retorna algum valor. Se tudo ocorreu bem, retorna <code>0</code>. Se deu algum erro, retorna <code>1</code> ou outro valor. Em shell script, <code>0</code> significa verdadeiro, e os outros valores significam falso. E como eu disse, todo comando retorna um valor para a shell, inclusive o seu script! Você usa <code>exit</code> para especificar que valor deve ser retornado. Se você não especificar, o retorno do último comando do seu script será usado.</p>
+<p>E existe uma variável especial, chamada <code>$?</code> que guarda o retorno do último comando executado. Pode ser útil, às vezes.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> rm saci-pererê.txt; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"Saci foi apagado."</span>; <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span> <span class="_">-f</span> saci-pererê.txt  <span class="comment"># Testa se o arquivo existe.</span></span><br><span class="line"><span class="keyword">if</span> [ $? <span class="_">-eq</span> 0 ]; <span class="keyword">then</span>  <span class="comment"># O valor do comando anterior (test) entra no lugar de '$?'.</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Saci ainda existe!"</span></span><br><span class="line">	<span class="built_in">exit</span> 1  <span class="comment"># Saímos com erro, porque o Saci não devia mais existir.</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">exit</span> 0  <span class="comment"># Saci deixou de existir. Sucesso!</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="Switch-case"><a href="#Switch-case" class="headerlink" title="Switch case"></a>Switch case</h2><p>Outra estrutura com uma sintaxe curiosa. Se você achava o <code>if</code> estranho, é melhor se sentar. Surpreendentemente ele é mais útil do que parece, pela forma como ele trata as strings. Você pode usar wildcards (<code>*</code> e <code>?</code>) para enriquecer as expressões usadas no switch.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">"Em que planeta você mora? "</span></span><br><span class="line"><span class="built_in">read</span> planeta</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$planeta</span> <span class="keyword">in</span></span><br><span class="line">	<span class="string">"terra"</span>)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Você é terráqueo."</span></span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line">	<span class="string">"marte"</span>)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Você é marciano."</span></span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Você é um lixo das galáxias! Sorry..."</span></span><br><span class="line">		;;</span><br><span class="line"><span class="keyword">esac</span>  <span class="comment"># "case" ao contrário para fechar o switch</span></span><br></pre></td></tr></table></figure>
+<p>Repare que você fecha o <code>case</code> usando <code>esac</code> (<code>case</code> ao contrário). E não me pergunte porquê você tem que colocar <code>;;</code> no final de cada caso! Deixo isso como um dever de casa para você. Boa sorte.</p>
+<h2 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h2><p>Temos duas opções de loop aqui: <code>while</code> e <code>for</code>. Cada um é útil em uma situação específica.</p>
+<h3 id="For"><a href="#For" class="headerlink" title="For"></a>For</h3><p>Na sua forma mais simples, você descrimina uma série de valores para o <code>for</code>, e a iteração acontecerá em cima desses valores. Veja o exemplo abaixo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># O script irá imprimir 'goiaba', 'abacaxi', e 'banana'</span></span><br><span class="line"><span class="comment"># cada um em uma linha separada.</span></span><br><span class="line"><span class="keyword">for</span> fruta <span class="keyword">in</span> goiaba abacaxi banana; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$fruta</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>Abaixo está um exemplo levemente mais útil. O script apagará todos os arquivos do diretório atual, exceto o arquivo <code>critico.txt</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="comment"># Pega todos os "txt" do diretório local.</span></span><br><span class="line">arquivos_txt=`ls *.txt`</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> arquivo <span class="keyword">in</span> <span class="variable">$arquivos_txt</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="variable">$arquivo</span> == <span class="string">"critico.txt"</span> ]; <span class="keyword">then</span></span><br><span class="line">		<span class="built_in">continue</span>  <span class="comment"># Pula 'critico.txt' para que ele não seja apagado</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">	rm <span class="variable">$arquivo</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>A variável <code>$arquivos_txt</code> é uma string que contém o nome de todos os arquivos <code>.txt</code> do diretório atual, separados por espaço (<code>`). O</code>for<code>irá quebrar essa string em múltiplos pedaços, separando pelos espaços (</code> <code>) e pelas quebras de linha (</code>\n<code>). Esses múltiplos pedaços serão passados para a variável</code>$arquivo`, um de cada vez.</p>
+<p>Você também pode usar as palavras chaves <code>continue</code> para pular uma iteração e continuar do começo, e <code>break</code> para sair do loop.</p>
+<p>Quando você desejar iterar sob uma sequência de números, você pode usar o comando <code>seq</code>. Exemplo: <code>seq 3</code> irá imprimir <code>1 2 3</code> (separados por <code>\n</code>, na verdade) e <code>seq 0 3</code> irá imprimir <code>0 1 2 3</code>. No exemplo abaixo, nós criamos uma sequência de 0 à 10, e elevamos cada um deles ao quadrado, e imprimimos.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(seq 0 10); <span class="keyword">do</span></span><br><span class="line">	i_quadrado=$(expr <span class="variable">$i</span> <span class="string">'*'</span> <span class="variable">$i</span>)</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$i</span> ao quadrado é igual a: <span class="variable">$i_quadrado</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="While"><a href="#While" class="headerlink" title="While"></a>While</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># Observação: Fazer um loop para vigiar se um arquivo foi criado</span></span><br><span class="line"><span class="comment"># é uma das piores coisas que você pode fazer durante sua existência</span></span><br><span class="line"><span class="comment"># na terra. Isso vai usar todo o seu processador. Não faça isso! É</span></span><br><span class="line"><span class="comment"># só um exemplo.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> [ ! <span class="_">-f</span> saci-pererê.txt ]; <span class="keyword">do</span>  <span class="comment"># Enquanto o arquivo *não* existe</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'Vigiando o Saci ser criado.'</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Alguém criou o Saci!! Apaga o Saci!"</span></span><br><span class="line">rm saci-pererê.txt</span><br></pre></td></tr></table></figure>
+<p>No exemplo, nós constantemente verificamos se o arquivo <code>saci-pererê.txt</code> existe. Enquanto o arquivo não existir, nós continuamos no loop imprimindo uma mensagem. Assim que o arquivo é criado, o loop termina, e nós apagamos o arquivo do Saci.</p>
+<p>Se você quiser trollar um amigo que usa Ubuntu, execute o script seguinte no computador dele. Coloque o arquivo em sua <code>$HOME</code> com o nome de <code>dull-boy.sh</code> (o nome é importante).</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="comment"># Número de ciclos do while para criar uma nova instância</span></span><br><span class="line"><span class="comment"># do gnome-terminal.</span></span><br><span class="line">ciclos_para_nova_instancia=1000</span><br><span class="line"></span><br><span class="line">ciclos=0</span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"All work and no play makes Jack a dull boy"</span></span><br><span class="line">	<span class="comment"># Incrementa o número de ciclos.</span></span><br><span class="line">	ciclos=`expr <span class="variable">$ciclos</span> + 1`</span><br><span class="line">	<span class="comment"># Verifica se chegou o momento de criar uma nova instância.</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"<span class="variable">$ciclos</span>"</span> <span class="_">-eq</span> <span class="string">"<span class="variable">$ciclos_para_nova_instancia</span>"</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		<span class="comment"># Cria uma nova instância do gnome-terminal, executando o mesmo script.</span></span><br><span class="line">		gnome-terminal -x sh dull-boy.sh</span><br><span class="line">		<span class="comment"># Reinicia a contagem dos ciclos.</span></span><br><span class="line">		ciclos=0</span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>O script irá imprimir <code>&quot;All work and no play makes Jack a dull boy&quot;</code> indeterminadamente. E a cada mil iterações, irá instanciar um novo terminal executando o mesmo script. Então seguindo uma curva exponencial, em pouco tempo você terá dezenas ou centenas de terminais na tela, todos imprimindo <code>&quot;All work and no play makes Jack a dull boy&quot;</code> ininterruptamente.</p>
+<p>Você pode tentar parar cada script com <code>Ctrl+C</code>. Porém chega uma hora que a única solução razoável é esperar que o sistema operacional congele os processos, ou, mais fácil, reiniciar o computador.</p>
+<p>Se você quiser trollar seu amigo em dobro, coloque uma linha <code>cd $HOME; sh dull-boy.sh</code> no final do arquivo <code>.bashrc</code> (se ele usa o Bash), assim o script irá executar toda vez que ele abrir o terminal. Mas cuidado, pois você pode não ter um amigo depois disso.</p>
+<h2 id="Argumentos"><a href="#Argumentos" class="headerlink" title="Argumentos"></a>Argumentos</h2><p>A maioria dos programas de linha de comando recebem e processam argumentos que são passados pelo usuário que estão invocando o programa.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ comando arg1 arg2 arg3 arg4</span><br></pre></td></tr></table></figure>
+<p>E para acessarmos os argumentos, usamos as variáveis <code>$1</code>, <code>$2</code>, <code>$3</code> e etc para acessarmos o primeiro argumento, o segundo argumento e daí em diante. <code>$0</code> é o nome do seu script (até que faz sentido, né?). E <code>$@</code> representa todos os argumentos juntos e em sequência (sem o <code>$0</code>). E <code>$#</code> é o número de argumentos recebidos (também sem o <code>$0</code>).</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"\$0: <span class="variable">$0</span>"</span>  <span class="comment"># Imprime o nome do script.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"\$@: <span class="variable">$@</span>"</span>  <span class="comment"># Imprime todos os argumentos.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"\$#: <span class="variable">$#</span>"</span>  <span class="comment"># Imprime o número de argumentos.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"\$1 \$2 \$3: <span class="variable">$1</span> <span class="variable">$2</span> <span class="variable">$3</span>"</span>  <span class="comment"># Imprime os primeiros três argumentos.</span></span><br></pre></td></tr></table></figure>
+<p>Se o seu script tiver recebido apenas dois argumentos e você tentar acessar, digamos, o argumento <code>$3</code>, o <code>$3</code> será substituído por uma string vazia. Para evitar isso, você pode testar se <code>$3</code> não é uma string vazia: <code>test -n &quot;$3&quot;</code> (as aspas são importantes nesse caso).</p>
+<p>Quando um argumento tem a forma <code>-e</code> ou <code>--exemplo</code>, ele é chamado de uma opção, e geralmente é… opcional na chamada de um programa. Você usou opções este tempo inteiro (<code>echo -n</code>, <code>rm -rf</code>, etc), deve saber como elas funcionam. Mas só para o caso de você não saber, vou explicar um pouquinho. Algumas opções são chamadas de forma isolada, como <code>--quiet</code>, e <code>--help</code>, e outras devem ser acompanhadas de um valor como: <code>--garrafas=12</code>, <code>--garrafas 12</code>, <code>-g12</code>. Ou: <code>--arquivo=&quot;file.txt&quot;</code>, <code>--arquivo &quot;file.txt&quot;</code>. As opções podem ser usadas, não importa a ordem: <code>cmd --input &quot;i.txt&quot; --output &quot;o.txt&quot;</code> deveria ser a mesma coisa que <code>cmd --output &quot;o.txt&quot; --input &quot;i.txt&quot;</code>. E as opções geralmente são misturadas com argumentos: <code>echo &quot;hello&quot; -n</code> (<code>n</code> é uma opção e <code>&quot;hello&quot;</code>, um argumento). E muitas opções que são escritas por extenso também tem uma forma abreviada, como <code>--help</code> é equivalente à <code>-h</code>, e <code>--quiet</code> é equivalente à <code>-q</code>. Quando você usa a forma abreviada, muitas vezes você também pode aglutinar as formas abreviadas, por exemplo <code>rm -rf</code> é equivalente à <code>rm -r -f</code>.</p>
+<p>É claro que nem todos os programas vão seguir essas regras para suas interfaces, mas essas são regras que você vai observar na maioria dos programas de linha de comando. Existem exceções, como exemplo, o programa <code>java</code> não têm opções abreviadas e as opções extensas usam um único hífen, tipo <code>java -version</code> ou <code>java -help</code>. (Para o caso de dúvida, programas feitos em Java podem ter qualquer interface que eles quiserem. Eu só quis dizer que o executável <code>java</code> funciona dessa forma.)</p>
+<p>E repare que apesar de <code>--arquivo &quot;file.txt&quot;</code> ser uma única opção, na shell eles são visto como dois argumentos separados. Shell script não diferencia argumentos de opções por você. Para o shell script, tudo é argumento.</p>
+<p>Se você quiser iterar sobre todos os argumentos, você pode usar um <code>for</code> para isso:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="keyword">for</span> arg <span class="keyword">in</span> <span class="variable">$@</span>; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Argumento <span class="variable">$arg</span>."</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>Outra opção semelhante é usando o comando <code>shift</code> juntamente com um <code>while</code>. Quando você usa <code>shift</code>, o <code>$2</code> será colocado no lugar do <code>$1</code>; o <code>$3</code> no lugar do <code>$2</code> e assim em diante. Dessa forma você pode ler o primeiro argumento do <code>$1</code>; fazer um <code>shift</code>, ler o segundo argumento do <code>$1</code>; <code>shift</code>, ler terceiro argumento do <code>$1</code> também; e etc.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="comment"># Irá imprimir "arg1", "arg2", "arg3", etc.</span></span><br><span class="line"><span class="keyword">while</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Argumento <span class="variable">$1</span>."</span></span><br><span class="line">	<span class="built_in">shift</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>Se você for criar um script que tenha uma interface extensa e complexa, e que precisa diferenciar e tratar argumentos e opções, você terá que usar altos recursos <em>imaginísticos</em> para alcançar seus objetivos. Há algum tempo atrás eu tive que fazer isso, e tive sucesso usando um <code>while</code> com um <code>case</code> e o comando <code>shift</code>. Se você precisar de inspiração, consulte o meu repositório <a href="https://github.com/possatti/pokemonsay/blob/master/pokemonsay.sh" target="_blank" rel="external">“pokemonsay”</a> no Github.</p>
+<h2 id="Pipe-e-redirecao"><a href="#Pipe-e-redirecao" class="headerlink" title="Pipe e redireção"></a>Pipe e redireção</h2><p>Essa é provavelmente a coisa mais interessante que você pode fazer em shell script. É usando <em>Pipes</em> (literalmente, canos, ou tubos) e redireção que você vai conseguir libertar os verdadeiros poderes do shell script.</p>
+<p>Antes de falar sobre isso, eu tenho que explicar uma coisa mais básica: <em>File Descriptors</em>. No mundo do Unix e Linux existe o que nós chamamos de <em>“file descriptor”</em>. Qualquer programa têm três <em>file descriptors</em>: Standard Input, Standard Output, e Standard Error. Comumente abreviados: <code>stdin</code>, <code>stdout</code> e <code>stderr</code>. O programa irá ler dados do <code>stdin</code>, irá escrever em <code>stdout</code>, e irá escrever os erros para <code>stderr</code>. Muitas vezes, o texto vindo de <code>stdin</code> será o texto digitado pelo usuário no teclado. Mas muitas outras vezes, esse texto será recebido de forma programática.</p>
+<p>Quando usamos pipe <code>|</code>, nós estamos conectando o <code>stdout</code> do comando à esquerda, com o <code>stdin</code> do comando à direita. É possível fazer vários pipes em sequência também. Você deve imaginar que o texto está fluindo da esquerda para a direita, e que cada comando está modificando o texto, ou agindo de alguma forma sobre ele. Vamos à um exemplo simples:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Imprime "laranja_123" (minúsculo)</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"LARANJA_123"</span> | tr <span class="string">'[:upper:]'</span> <span class="string">'[:lower:]'</span></span><br></pre></td></tr></table></figure>
+<p>O <code>tr</code> é um programa que troca alguns caracteres por outros (<code>man tr</code>). Perceba que o <code>echo</code> escreveu o texto em seu <code>stdout</code> (normalmente seria impresso, mas não foi devido ao pipe), e seu <code>stdout</code> foi redirecionado para o <code>stdin</code> de <code>tr</code>.  E o <code>tr</code>, após manipular o texto (substituir maiúsculas por minúsculas), escreveu o resultado em seu <code>stdout</code>, que por sua vez foi impresso na tela.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Imprime "laranja"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"LARANJA_123"</span> | tr <span class="string">'[:upper:]'</span> <span class="string">'[:lower:]'</span> | tr <span class="_">-d</span> <span class="string">'[_0-9]'</span></span><br></pre></td></tr></table></figure>
+<p>Mais um pipe agora. Dessa vez, o <code>stdout</code> do primeiro <code>tr</code> não é impresso, mas é redirecionado para o <code>stdin</code> do segundo <code>tr</code>. O segundo <code>tr</code> irá ler o texto de seu <code>stdin</code>, modificá-lo (remover os números e underline <code>_</code>), e escrever em seu <code>stdout</code>. Como não há mais nenhuma redireção, seu <code>stdout</code> será impresso.</p>
+<p>Também podemos fazer redireções usando arquivos. <code>&gt;</code> é usado para redirecionar o <code>stdout</code> para um arquivo, porém apaga o conteúdo do arquivo se ele já existir. <code>&gt;&gt;</code> faz o mesmo que <code>&gt;</code>, porém não apaga o conteúdo original do arquivo. Ao final do script abaixo, teremos um arquivo com três frutas: Caju, Mamão e Pêra.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Escreve "Banana" no arquivo "frutas.txt".</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Banana"</span> &gt; frutas.txt</span><br><span class="line"><span class="comment"># Apaga o conteúdo do arquivo inteiro, e depois escreve "Caju" nele.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Caju"</span> &gt; frutas.txt</span><br><span class="line"><span class="comment"># Escreve "Mamão" no final do arquivo, sem apagar seu conteúdo.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Mamão"</span> &gt;&gt; frutas.txt</span><br><span class="line"><span class="comment"># Escreve "Pêra_123" no final do arquivo, sem apagar seu conteúdo.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Pêra_123"</span> &gt;&gt; frutas.txt</span><br></pre></td></tr></table></figure>
+<p>Equivalente ao <code>&gt;</code> temos o <code>&lt;</code> que faz exatamente o contrário. Ele serve para “puxarmos” o texto de um arquivo e fornecer como entrada para o <code>stdin</code> de um programa. Exemplo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Transforma o texto de 'frutas.txt' para maiúsculas.</span></span><br><span class="line">tr <span class="string">'[:lower:]'</span> <span class="string">'[:upper:]'</span> &lt; frutas.txt</span><br></pre></td></tr></table></figure>
+<p>O texto contido em <code>frutas.txt</code> será direcionado para o <code>stdin</code> de <code>tr</code>, que irá modificar o texto e imprimir na tela.</p>
+<p>Também é comum usarmos <code>&lt;</code>, <code>&gt;</code> e <code>|</code> tudo junto. É um pouco difícil de se acostumar com a leitura. Mas é algo comum e útil. Veja o exemplo abaixo.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Transforma o texto de 'frutas.txt' para maiúsculas, remove números e '_'</span></span><br><span class="line"><span class="comment"># e grava em 'FRUTAS.TXT'.</span></span><br><span class="line"><span class="comment"># Perceba que nada é impresso. Pois tudo é gravado em 'FRUTAS.TXT'.</span></span><br><span class="line">tr <span class="string">'[:lower:]'</span> <span class="string">'[:upper:]'</span> &lt; frutas.txt | tr <span class="_">-d</span> <span class="string">'[_0-9]'</span> &gt; FRUTAS.TXT</span><br></pre></td></tr></table></figure>
+<p>Pêra! (huehue) Se existe <code>&gt;</code> e <code>&gt;&gt;</code>, deve existir também <code>&lt;&lt;</code>, já que existe <code>&lt;</code>. Sim, senhor. E o nome disso é “<a href="https://en.wikipedia.org/wiki/Here_document" target="_blank" rel="external">Here Document</a>“. Ao invés de ler de um arquivo (como <code>&lt;</code>) o texto será lido do próprio script.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tr <span class="string">'[:lower:]áãçó'</span> <span class="string">'[:upper:]ÁÃÇÓ'</span> &lt;&lt; EOF</span><br><span class="line">O empenho em analisar o aumento <span class="keyword">do</span> diálogo entre os diferentes</span><br><span class="line">setores produtivos estimula a padronização dos modos de operação</span><br><span class="line">convencionais.</span><br><span class="line">Desta maneira, o julgamento imparcial das eventualidades cumpre</span><br><span class="line">um papel essencial na formulação <span class="keyword">do</span> impacto na agilidade decisória.</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>Perceba que depois do <code>&lt;&lt;</code> temos um token (<code>EOF</code>) que abre o texto do <a href="http://www.lerolero.com/" target="_blank" rel="external">lerolero.com</a>, e em seguida o <strong>mesmo token</strong> deverá ser repetido em sua própria linha, para fechar o texto. O texto que está entre os dois <code>EOF</code> (<em>end of file</em>, fim de arquivo), será usado como entrada de dados para o <code>tr</code>, que por usa vez imprimirá o texto inteiro em letras maiúsculas. É comum usarmos a sigla <code>EOF</code> como token, mas pode ser qualquer palavra, como <code>LEROLERO</code>, ou <code>HELLO_WORLD!</code>.</p>
+<p>Agora um pequeno exercício mental. Tente entender que parte de texto está servindo de entrada para qual comando. Boa sorte.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">sh &lt;&lt; MIND</span><br><span class="line">sh &lt;&lt; BLOWING</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Mind blowing."</span></span><br><span class="line">BLOWING</span><br><span class="line">MIND</span><br></pre></td></tr></table></figure>
+<p>Cada <em>file descriptor</em> tem um número associado: <code>stdin</code>, <code>0</code>; <code>stdout</code>, <code>1</code>; e <code>stderr</code>, <code>2</code>. É comum redirecionarmos o <code>stderr</code> de um programa para o <code>stdout</code> do mesmo programa. Fazemos isso usando <code>2&gt;&amp;1</code>. Isso é muito útil quando temos um programa que escreve coisas importante para <code>stderr</code>, porém nós queremos gravar em um arquivo, por exemplo. Para isso fazemos <code>prog 2&gt;&amp;1 &gt; meu.log</code>. Ou ainda podemos gravar o <code>stdout</code> e o <code>stderr</code> em diferentes arquivos: <code>prog 1&gt; meu.log 2&gt; erros.log</code>.</p>
+<p>E se quisermos direcionar o <code>stdout</code> para <code>stderr</code>, usamos <code>1&gt;&amp;2</code>. Você pode usar isso para escrever em <code>stderr</code> no seu script através de <code>echo 1&gt;&amp;2</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"Hello"</span>  <span class="comment"># Imprime através do `stdout`</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"World"</span> 1&gt;&amp;2  <span class="comment"># Imprime na tela, porém através do `stderr`</span></span><br></pre></td></tr></table></figure>
+<p>Redireções também funcionam com estruturas como <code>for</code> e <code>while</code>. Quando você chega nesse nível, as coisas podem ficar extremamente confusas. O exemplo abaixo, lê as linhas de um arquivo <code>lower.txt</code>, colocando cada uma delas na variável <code>$linha</code>, que é <code>echo</code>ada para <code>tr</code>, que transforma tudo em maiúsculas. Porém o <code>stdout</code> de <code>tr</code> vai para um segundo <code>tr</code> que apaga as vogais do texto. E em seguida, o resultado é escrito em <code>UPPER.txt</code>. Loucura.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> linha; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$linha</span> | tr <span class="string">'[:lower:]'</span> <span class="string">'[:upper:]'</span></span><br><span class="line"><span class="keyword">done</span> &lt; lower.txt | tr <span class="_">-d</span> <span class="string">'aeiou'</span> &gt; UPPER.txt</span><br></pre></td></tr></table></figure>
+<p>Era possível escrever o script acima de forma mais simples. Mas eu queria fazer assim, para você exercitar seu poderoso cérebro.</p>
+<h2 id="Funcoes"><a href="#Funcoes" class="headerlink" title="Funções"></a>Funções</h2><p>Funções funcionam como mini-scripts contidos no seu script. Elas são declaradas como <code>foo() { ... }</code> e são invocadas como qualquer outro comando: <code>foo arg1 arg2 arg3 ...</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line"><span class="function"><span class="title">somar</span></span>() &#123;</span><br><span class="line">	<span class="comment"># Soma os dois argumentos recebidos *pela função*.</span></span><br><span class="line">	expr <span class="variable">$1</span> <span class="string">'+'</span> <span class="variable">$2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Processa todos os argumentos recebidos pelo script</span></span><br><span class="line"><span class="comment"># somando todos eles.</span></span><br><span class="line">resultado=0</span><br><span class="line"><span class="keyword">while</span> [ -n <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">do</span></span><br><span class="line">	<span class="comment"># Soma o argumento com o resultado atual.</span></span><br><span class="line">	resultado=`somar <span class="variable">$resultado</span> <span class="variable">$1</span>`</span><br><span class="line">	<span class="comment"># Coloca o $2 no lugar do $1; o $3 no lugar do $2; etc.</span></span><br><span class="line">	<span class="built_in">shift</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Soma total: <span class="variable">$resultado</span>"</span></span><br></pre></td></tr></table></figure>
+<p>Perceba que dentro da função <code>$1</code> e <code>$2</code> são argumentos recebidos <strong>pela função</strong>, e não pelo script. Do lado de fora da função, nós estamos usando o <code>$1</code> que é o primeiro argumento do nosso script. Veja que as duas coisas não se misturam.</p>
+<p><strong>Cuidado:</strong> as funções podem alterar variáveis do escopo global:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">troll</span></span>() &#123;</span><br><span class="line">	x=2</span><br><span class="line">&#125;</span><br><span class="line">x=1</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$x</span>  <span class="comment"># Imprime '1'</span></span><br><span class="line">troll  <span class="comment"># Muda o valor de 'x'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$x</span>  <span class="comment"># Imprime '2'</span></span><br></pre></td></tr></table></figure>
+<p>Eu acho que isso é o que tem de mais importante para falar sobre as funções em shell script. Acho que você deve saber o que fazer a partir daqui. Mas me sinto culpado de não colocar um exemplo um pouco mais complexo. Então abaixo está uma função que calcula o fatorial de um número.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">fatorial</span></span>() &#123;</span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> <span class="_">-gt</span> <span class="string">"1"</span> ]; <span class="keyword">then</span></span><br><span class="line">		i=`expr <span class="variable">$1</span> - 1`</span><br><span class="line">		j=`fatorial <span class="variable">$i</span>`</span><br><span class="line">		k=`expr <span class="variable">$1</span> \* <span class="variable">$j</span>`</span><br><span class="line">		<span class="built_in">echo</span> <span class="variable">$k</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">echo</span> 1</span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Calcula os 5 primeiros fatoriais.</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> `seq 5`; <span class="keyword">do</span></span><br><span class="line">	fatorial <span class="variable">$n</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h2 id="Matematica"><a href="#Matematica" class="headerlink" title="Matemática"></a>Matemática</h2><p>De vez em quando precisamos fazer uma conta ou outra em shell script. A forma como fazemos isso é usando qualquer comando que faça contas. Alguns dos mais úteis são <code>expr</code> e <code>bc</code>.</p>
+<p>O mais básico é o <code>expr</code>. Ele serve para fazer contas simples, mas deixa a desejar para contas mais complexas e de número flutuante. E ele é um pouco chato quanto aos espaços. Você precisa separar cada um dos números e operadores, pois eles devem ser recebidos como diferentes argumentos. E você precisa ter cuidado com o <code>*</code> de multiplicação, para que ele não seja interpretado como um wildcard antes mesmo de ser recebido pelo <code>expr</code>, então use <code>\*</code> ou <code>&#39;*&#39;</code>. O mesmo vale para os parênteses, use <code>\( ... \)</code>, ou <code>&#39;(&#39; ... &#39;)&#39;</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">expr 2 + 2  <span class="comment"># "4"</span></span><br><span class="line">expr 2+2  <span class="comment"># "2+2" -- lol</span></span><br><span class="line">expr 2+2 + 2  <span class="comment"># "expr: non-integer argument"</span></span><br><span class="line">expr 2 <span class="string">'*'</span> 3  <span class="comment"># "6"</span></span><br><span class="line">expr 8 \* 0.5 <span class="comment"># "expr: non-integer argument"</span></span><br><span class="line">expr 8 / 4 <span class="comment"># "2"</span></span><br><span class="line">expr 8 / 5 <span class="comment"># "1" -- A divisão é inteira</span></span><br><span class="line">expr \( 3 + 7 \) / \( 1 + 1 \)  <span class="comment"># "5"</span></span><br></pre></td></tr></table></figure>
+<p>Como você pode ver, <code>expr</code> apenas gosta de números inteiros. Além disso, expressões mais complexas ficam extremamente longas, já que você tem que colocar espaços ao redor de tudo. Para contas um pouco mais complexas, ou quando você quiser usar números decimais, recomendo usar o <code>bc</code>. Porém este programa possui outro inconveniente: você tem que passar as contas para ele por redirecionamento, pois ele não processa contas pelos argumentos. E para contas com muitas casas decimais, use <code>bc -l</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"2 + 2"</span> | bc  <span class="comment"># "4"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2+2 + 2"</span> | bc  <span class="comment"># "6"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2*3"</span> | bc  <span class="comment"># "6"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"8 * 0.5"</span> | bc  <span class="comment"># "4.0"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"8 / 4"</span> | bc  <span class="comment"># "2"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"8 / 5"</span> | bc  <span class="comment"># "1"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"8 / 5"</span> | bc <span class="_">-l</span>  <span class="comment"># "1.60000000000000000000"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"(3 + 7) /2"</span> | bc  <span class="comment"># "5"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2.22 / 1.22 * 0.75"</span> | bc  <span class="comment"># ".75" -- What???</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2.22 / 1.22 * 0.75"</span> | bc <span class="_">-l</span>  <span class="comment"># "1.36475409836065573770" -- Hmmmm</span></span><br></pre></td></tr></table></figure>
+<p>Eu nunca usei muito o <code>bc</code>, mas parece que ele é capaz de fazer <a href="https://en.wikipedia.org/wiki/Bc_(programming_language)#GNU_bc" target="_blank" rel="external">bem mais</a>. Se você precisar de expressões matemáticas complexas, dê uma olhada na sua documentação com carinho.</p>
+<h2 id="Manipulacao-de-texto"><a href="#Manipulacao-de-texto" class="headerlink" title="Manipulação de texto"></a>Manipulação de texto</h2><p>Umas das coisas mais comuns que você vai fazer em shell script é manipular texto. Por isso é bom que você saiba fazer isso bem. Minha sugestão é que você aprenda bem, um dos seguintes programas: <code>sed</code>, <code>awk</code> ou <code>perl</code>. Eu costumo usar o <code>sed</code>. Porém explicar como ele funciona é um tutorial à parte. Mas veja algumas coisas básica que você pode fazer com o <code>sed</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Imprime todo o texto recebido, porém substituindo "banana" por "maçã"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"banana-banana"</span> | sed <span class="string">'s/banana/maçã/g'</span>  <span class="comment"># "maçã-maçã"</span></span><br><span class="line"><span class="comment"># Imprime apenas as linhas que começam com "Erro" ou "erro"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"Uva\nErro 1\nPêra\nerro2-critico"</span> | sed -nr <span class="string">'/^[Ee]rro/p'</span>  <span class="comment"># "Erro 1\nerro2-critico"</span></span><br><span class="line"><span class="comment"># Formata um número de telefone</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'27988882222'</span> | sed -r <span class="string">'s/(.&#123;2&#125;)(.&#123;1&#125;)(.&#123;4&#125;)(.&#123;4&#125;)/(\1) \2 \3-\4/'</span>  <span class="comment"># "(27) 9 8888-2222"</span></span><br><span class="line"><span class="comment"># Pega apenas o nome do arquivo</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"fotos/viagem/familia.jpg"</span> | sed -r <span class="string">'s;.*/([a-Z]+)\..+;\1;'</span>  <span class="comment"># "familia"</span></span><br></pre></td></tr></table></figure>
+<p>Infelizmente não tem como eu explicar aqui com detalhes como funciona o <code>sed</code>. Mas, pelo menos, o primeiro exemplo você deve ter entendido. Eu, pessoalmente, aprendi o que sei de <code>sed</code> (30% do total, talvez) usando uma <a href="http://www.grymoire.com/Unix/Sed.html" target="_blank" rel="external">página na internet que parecia ter sido feita no período jurássico</a>. Mas sinta-se livre para buscar qualquer fonte que possa te ajudar.</p>
+<h2 id="Conclusao"><a href="#Conclusao" class="headerlink" title="Conclusão"></a>Conclusão</h2><p>Essa é a despedida. Depois de tudo isso, eu agora espero que você consiga usar shell script para resolver seus problemas. Se ficou faltando alguma coisa, ou não deu para entender alguma parte, pode postar o seu feedback aqui nos comentários.</p>
+<p>É isso aí. Abraço.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://possatti.com.br/shell-script/" data-id="ciq2szm1x000aosre42kiw16i" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>seguir:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="https://plus.google.com/+LucasPossatti" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/possatti" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/zettajs/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antigos</strong>
+        <p class="article-nav-title">ZettaJS</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recentes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/shell-script/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/sh.png)" alt="Tutorial de Shell Script" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/shell-script/" class="title">Tutorial de Shell Script</a></p>
+                            <p class="item-date"><time datetime="2016-06-30T15:41:53.000Z" itemprop="datePublished">30/06/2016</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/zettajs/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/zetta-logo.svg)" alt="ZettaJS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/zettajs/" class="title">ZettaJS</a></p>
+                            <p class="item-date"><time datetime="2015-03-31T04:11:36.000Z" itemprop="datePublished">31/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/git-pro-tip-diretorios-vazios/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git-logo.png)" alt="Git Pro Tip: Diretórios vazios" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/git-pro-tip-diretorios-vazios/" class="title">Git Pro Tip: Diretórios vazios</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/jekyll/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/jekyll-logo.png)" alt="Jekyll" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/jekyll/" class="title">Jekyll</a></p>
+                            <p class="item-date"><time datetime="2014-08-22T10:27:29.000Z" itemprop="datePublished">22/08/2014</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">arquivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">Junho 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">Março 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">Agosto 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/">IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protip/">protip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-script/">shell script</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IoT/" style="font-size: 10px;">IoT</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a> <a href="/tags/protip/" style="font-size: 10px;">protip</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Lucas Possatti</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'possatti';
+    
+    
+    var disqus_url = 'http://possatti.com.br/shell-script/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
