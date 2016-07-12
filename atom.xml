@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://possatti.com.br/"/>
-  <updated>2016-07-12T03:11:51.410Z</updated>
+  <updated>2016-07-12T06:00:07.147Z</updated>
   <id>http://possatti.com.br/</id>
   
   <author>
@@ -14,6 +14,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Minha experiência no LEDS</title>
+    <link href="http://possatti.com.br/leds/"/>
+    <id>http://possatti.com.br/leds/</id>
+    <published>2016-07-12T15:41:53.000Z</published>
+    <updated>2016-07-12T06:00:07.147Z</updated>
+    
+    <content type="html">&lt;p&gt;Durante a faculdade no IFES campus Serra, eu fiz parte do LEDS. Com a minha saída deste laboratório, eu publiquei um post no blog do LEDS, e nele eu conto sobre o que eu vivi ali dentro.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      Este é um post que publiquei no blog do LEDS, como minha despedida. No post eu conto sobre o que vivi dentro do laboratório.
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Tutorial de Shell Script</title>
