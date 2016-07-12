@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://possatti.com.br/"/>
-  <updated>2016-07-12T06:00:07.147Z</updated>
+  <updated>2016-07-12T08:35:01.484Z</updated>
   <id>http://possatti.com.br/</id>
   
   <author>
@@ -16,11 +16,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Curso de git</title>
+    <link href="http://possatti.com.br/curso-de-git/"/>
+    <id>http://possatti.com.br/curso-de-git/</id>
+    <published>2016-07-12T08:32:52.000Z</published>
+    <updated>2016-07-12T08:35:01.484Z</updated>
+    
+    <content type="html">&lt;p&gt;Após minha saída do LEDS, com a ajuda dos professores do IFES, eu criei uma série de vídeo tutoriais sobre o Git. Nos vídeos eu explico sobre as funções mais básicas, e algumas mais complexas. Em todos os vídeos eu me preocupei em explicar as coisas de forma que um iniciante conseguisse trabalhar tranquilamente usando o Git após o curso. E eu também falo um pouco sobre &lt;em&gt;workflows&lt;/em&gt; e as formas como você pode trabalhar em equipe ao final.&lt;/p&gt;
+&lt;p&gt;Criar esse curso foi uma experiência totalmente nova para mim. E nos primeiros vídeos eu estava incrivelmente nervoso, mas consegui melhorar um pouco ao longo dos vídeos.&lt;/p&gt;
+&lt;p&gt;Eu queria ter editado cada um dos vídeos que eu gravei em meu computador, para cortar algumas partes desnecessárias e alguns erros, e para dar uma polida nos vídeos. Mas, infelizmente, eu não consegui editar os vídeos de forma satisfatória. E como já estava demorando muito, resolvemos publicar os vídeos da forma que foi possível (sem edição).&lt;/p&gt;
+&lt;p&gt;Então, apesar de não estar perfeito, vos apresento o curso: &lt;a href=&quot;https://youtu.be/TC5r2qGiqcI?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;clique aqui&lt;/a&gt;.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      Após minha saída do LEDS, com a ajuda dos professores do IFES, eu criei uma série de vídeo tutoriais sobre o Git.
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://possatti.com.br/tags/git/"/>
+    
+      <category term="leds" scheme="http://possatti.com.br/tags/leds/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sincap</title>
+    <link href="http://possatti.com.br/sincap/"/>
+    <id>http://possatti.com.br/sincap/</id>
+    <published>2016-07-12T07:54:40.000Z</published>
+    <updated>2016-07-12T08:00:04.656Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/sincap-reportagem.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Durante a faculdade no IFES campus Serra, eu tive a oportunidade de participar do &lt;a href=&quot;http://leds.sr.ifes.edu.br/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;LEDS&lt;/a&gt;. No tempo em que estive lá, eu trabalhei principalmente em um projeto chamado &lt;a href=&quot;http://leds.sr.ifes.edu.br/portfolio/sincap/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Sincap&lt;/a&gt;. Que foi um sistema para auxiliar no processo de doações de córneas do estado do Espírito Santo.&lt;/p&gt;
+&lt;p&gt;Durante o seu desenvolvimento, o Sincap apareceu em uma &lt;a href=&quot;http://www.gazetaonline.com.br/_conteudo/2014/08/noticias/cidades/1495041-alunos-do-ifes-criam-sistema-de-captacao-de-cornea.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;reportagem no jornal A Gazeta&lt;/a&gt;, e uma &lt;a href=&quot;http://www.folhavitoria.com.br/videos/2014/08/2934103-011-captacao-de-orgaos-mais-rapida.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;reportagem no jornal ES NO AR, na TV Vitória&lt;/a&gt;. E também foi &lt;a href=&quot;http://leds.sr.ifes.edu.br/sincap-e-premiado-na-11a-semana-estadual-de-ciencia-e-tecnologia/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;premiado na 11ª Semana Estadual de Ciência e Tecnologia&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;O processo natural para a doação de córneas no Espírito Santo é todo feito por telefonemas e formulários preenchidos a mão, que são enviados para lá e para cá através de Fax. O Sincap foi criado como uma tentativa de modernizar e agilizar esse processo.&lt;/p&gt;
+&lt;p&gt;Infelizmente, pelo que eu conversei com amigos que ainda estão no LEDS, o Sincap ainda não foi implantado, em função de um pouco de burocracia e um desandamento nas negociações.&lt;/p&gt;
+&lt;p&gt;É uma pena. Mas independente do seu fim, eu aprendi bastante com esse projeto. E tenho certeza que a equipe inteira também. Trabalhar com o Sincap foi a primeira experiência que eu tive de trabalhar em um projeto real. Nós tínhamos que fazer a parte de análise e projeto do sistema, fazer entrevistas com o cliente, implementar, testar o sistema, e etc. Cada membro da equipe trabalhava com um pouco de cada coisa.&lt;/p&gt;
+&lt;p&gt;O Sincap foi praticamente a minha primeira vez trabalhando em um sistema Web. Eu aprendi muita coisa trabalhando nele. Nós usamos Java e &lt;a href=&quot;https://spring.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Spring Framework&lt;/a&gt; para construir o servidor Web. &lt;a href=&quot;http://hibernate.org/orm/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hibernate&lt;/a&gt; para a persistência de dados. O &lt;a href=&quot;https://maven.apache.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Maven&lt;/a&gt; para gerenciar as dependências e as &lt;em&gt;builds&lt;/em&gt; do projeto. E para a parte de &lt;em&gt;front-end&lt;/em&gt;, um dos professores comprou um template de interface de administrador (baseado em &lt;a href=&quot;http://getbootstrap.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;bootstrap&lt;/a&gt;) que nós usávamos para construir as telas. Também chegamos ao ponto de construir um servidor de integração contínua usando &lt;a href=&quot;https://jenkins.io/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Jenkins&lt;/a&gt;, apesar de que ele não era realmente usado enquanto estive lá. E usávamos o &lt;a href=&quot;https://git-scm.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Git&lt;/a&gt; para o controle de versão.&lt;/p&gt;
+&lt;p&gt;Foram muitas as lições aprendidas. E não era tudo um mar de rosas, mas no geral foi bom trabalhar no projeto.  :)&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      O Sincap foi um projeto em que trabalhei durante o meu tempo no LEDS.
+    
+    </summary>
+    
+    
+      <category term="leds" scheme="http://possatti.com.br/tags/leds/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Minha experiência no LEDS</title>
     <link href="http://possatti.com.br/leds/"/>
     <id>http://possatti.com.br/leds/</id>
-    <published>2016-07-12T15:41:53.000Z</published>
-    <updated>2016-07-12T06:00:07.147Z</updated>
+    <published>2016-07-12T06:10:53.000Z</published>
+    <updated>2016-07-12T07:56:21.570Z</updated>
     
     <content type="html">&lt;p&gt;Durante a faculdade no IFES campus Serra, eu fiz parte do LEDS. Com a minha saída deste laboratório, eu publiquei um post no blog do LEDS, e nele eu conto sobre o que eu vivi ali dentro.&lt;/p&gt;
 </content>
@@ -32,6 +86,8 @@
     </summary>
     
     
+      <category term="leds" scheme="http://possatti.com.br/tags/leds/"/>
+    
   </entry>
   
   <entry>
@@ -39,7 +95,7 @@
     <link href="http://possatti.com.br/shell-script/"/>
     <id>http://possatti.com.br/shell-script/</id>
     <published>2016-06-30T15:41:53.000Z</published>
-    <updated>2016-07-12T03:11:51.410Z</updated>
+    <updated>2016-07-12T08:03:56.131Z</updated>
     
     <content type="html">&lt;p&gt;Neste post vou explicar um pouco de tudo o que eu sei sobre shell script. Eu comecei a usar shell script porque eu queria automatizar algumas tarefas minhas. E meu gosto pela linguagem começou pela minha fascinação. Eu lia alguns scripts, mas não entendia nada! Além disso eu percebia o potencial da linguagem, as coisas que eu poderia criar com aquilo.&lt;/p&gt;
 &lt;p&gt;Shell script é uma linguagem com uma sintaxe extranhíssima e muito diferente de qualquer outra linguagem que eu conhecia antes. Eu tinha experiência com linguagens como Python, Java, um pouco de C e outras. E estudando shell script eu aprendi muita coisa que eu não conhecia, e que pode ser aplicado em outras linguagens. Então depois de estudar, sinto que conheço mais sobre programação de forma geral. Estudar shell script também me permitiu conhecer melhor como funciona a arquitetura de programas e processos do Linux. Antes disso, eu não sabia o que era &lt;code&gt;stdout&lt;/code&gt; e &lt;code&gt;stdin&lt;/code&gt; por exemplo. E hoje eu percebo que esse é um conhecimento bem útil e que eu não tinha antes.&lt;/p&gt;
@@ -315,9 +371,9 @@
     </summary>
     
     
-      <category term="IoT" scheme="http://possatti.com.br/tags/IoT/"/>
-    
       <category term="javascript" scheme="http://possatti.com.br/tags/javascript/"/>
+    
+      <category term="IoT" scheme="http://possatti.com.br/tags/IoT/"/>
     
   </entry>
   
