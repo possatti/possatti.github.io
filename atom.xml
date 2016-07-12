@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://possatti.com.br/"/>
-  <updated>2016-07-12T08:35:01.484Z</updated>
+  <updated>2016-07-12T11:24:52.394Z</updated>
   <id>http://possatti.com.br/</id>
   
   <author>
@@ -20,12 +20,13 @@
     <link href="http://possatti.com.br/curso-de-git/"/>
     <id>http://possatti.com.br/curso-de-git/</id>
     <published>2016-07-12T08:32:52.000Z</published>
-    <updated>2016-07-12T08:35:01.484Z</updated>
+    <updated>2016-07-12T11:24:52.394Z</updated>
     
     <content type="html">&lt;p&gt;Após minha saída do LEDS, com a ajuda dos professores do IFES, eu criei uma série de vídeo tutoriais sobre o Git. Nos vídeos eu explico sobre as funções mais básicas, e algumas mais complexas. Em todos os vídeos eu me preocupei em explicar as coisas de forma que um iniciante conseguisse trabalhar tranquilamente usando o Git após o curso. E eu também falo um pouco sobre &lt;em&gt;workflows&lt;/em&gt; e as formas como você pode trabalhar em equipe ao final.&lt;/p&gt;
 &lt;p&gt;Criar esse curso foi uma experiência totalmente nova para mim. E nos primeiros vídeos eu estava incrivelmente nervoso, mas consegui melhorar um pouco ao longo dos vídeos.&lt;/p&gt;
 &lt;p&gt;Eu queria ter editado cada um dos vídeos que eu gravei em meu computador, para cortar algumas partes desnecessárias e alguns erros, e para dar uma polida nos vídeos. Mas, infelizmente, eu não consegui editar os vídeos de forma satisfatória. E como já estava demorando muito, resolvemos publicar os vídeos da forma que foi possível (sem edição).&lt;/p&gt;
-&lt;p&gt;Então, apesar de não estar perfeito, vos apresento o curso: &lt;a href=&quot;https://youtu.be/TC5r2qGiqcI?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;clique aqui&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Então, apesar de não estar perfeito, vos apresento o &lt;a href=&quot;https://youtu.be/TC5r2qGiqcI?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;curso&lt;/a&gt;.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/TC5r2qGiqcI?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
 </content>
     
     <summary type="html">
@@ -35,9 +36,9 @@
     </summary>
     
     
-      <category term="git" scheme="http://possatti.com.br/tags/git/"/>
-    
       <category term="leds" scheme="http://possatti.com.br/tags/leds/"/>
+    
+      <category term="git" scheme="http://possatti.com.br/tags/git/"/>
     
   </entry>
   
@@ -371,9 +372,9 @@
     </summary>
     
     
-      <category term="javascript" scheme="http://possatti.com.br/tags/javascript/"/>
-    
       <category term="IoT" scheme="http://possatti.com.br/tags/IoT/"/>
+    
+      <category term="javascript" scheme="http://possatti.com.br/tags/javascript/"/>
     
   </entry>
   
