@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Elvis Operator - Angular 2 | Lucas Possatti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="angular2" />
+    
+    <meta name="description" content="No Angular 2, o Elvis Operator, é um operador usado para acessar uma propriedade de um objeto, apenas quando ele não é nulo.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elvis Operator - Angular 2">
+<meta property="og:url" content="http://possatti.com.br/angular2-elvis-operator/index.html">
+<meta property="og:site_name" content="Lucas Possatti">
+<meta property="og:description" content="No Angular 2, o Elvis Operator, é um operador usado para acessar uma propriedade de um objeto, apenas quando ele não é nulo.">
+<meta property="og:image" content="http://possatti.com.br/images/angular2.png">
+<meta property="og:updated_time" content="2016-11-05T02:41:59.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elvis Operator - Angular 2">
+<meta name="twitter:description" content="No Angular 2, o Elvis Operator, é um operador usado para acessar uma propriedade de um objeto, apenas quando ele não é nulo.">
+<meta name="twitter:image" content="http://possatti.com.br/images/angular2.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/logo-black.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-60892717-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">Sobre</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Busca"><input type="hidden" name="sitesearch" value="http://possatti.com.br"></form>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    sem categoria
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-angular2-elvis-operator" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Elvis Operator - Angular 2
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/angular2-elvis-operator/" class="article-date">
+    <time datetime="2016-11-05T01:18:00.000Z" itemprop="datePublished">04/11/2016</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular2/">angular2</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>Outro dia no trabalho, eu precisei colocar atributos de um objeto em um formulário usando o Angular 2. Porém eu não inicializava o objeto de imediato. O objeto só seria inicializado quando um serviço retornasse a reposta do servidor. E em função disso a <em>view</em> não renderizava, devido a um erro quando o Angular tentava acessar o atributo de um valor nulo. Buscando uma solução para o problema, eu acabei me deparando com o “<em>Elvis Operator</em>“ (<code>?.</code>). Que, devo admitir, me chamou bastante a atenção pelo nome curioso.</p>
+<p>O <a href="https://en.wikipedia.org/wiki/Elvis_operator" target="_blank" rel="external"><em>Elvis Operator</em> não é um conceito novo</a>. Ele já é usado em algumas linguagens de programação, como C++, Groovy, PHP e outras. E antes que você me pergunte, eu já te aviso que ele não é um operador nativo do Javascript. Ele realmente só funciona dentro dos templates HTML do Angular 2. Vale a pena ler a <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#safe-navigation-operator" target="_blank" rel="external">documentação oficial</a>.</p>
+<p>E note que há algum tempo atrás o <em>Elvis Operator</em> do Angular foi <a href="https://reviews.angular.io/R6:4cfff4148523b67eb204225f89bff3485e44ce4f" target="_blank" rel="external">renomeado</a> para “<em>Safe Navigation Operator</em>“ (Operador de Navegação Segura), que é um nome muito mais chato, convenhamos… <em>Elvis Operator</em> é um nome muito mais legal. Só dizendo.</p>
+<!--
+**Obs:** Se eu entendi certo, talvez *Elvis Operator* seja sequer o termo correto para essa operação. Possivelmente o nome mais apropriado para essa operação seja *null-safe dereferencing*. Aparentemente existe uma [confusão entre os dois termos][the-true-elvis].
+
+[the-true-elvis]: http://mail.openjdk.java.net/pipermail/coin-dev/2009-July/002089.html
+-->
+<p>No Angular 2, esse operador é usado para acessar um atributo de um objeto, apenas quando o objeto não é nulo. Enquanto ele for nulo, nada é acessado. Assim nós não nos deparamos com um erro, e a aplicação continua funcionando normalmente. Imediatamente quando o valor deixa de ser nulo, o atributo será acessado e renderizado na tela.</p>
+<p>Para obter esse efeito poderíamos usar uma expressão como <code>carro &amp;&amp; carro.cor</code>, dessa forma <code>carro.cor</code> seria acessado apenas se <code>carro</code> não fosse nulo. Essa expressão funciona, porém utilizando o <em>Elvis Operator</em> podemos simplificar a expressão para apenas <code>carro?.cor</code>.</p>
+<p>Vamos a um exemplo mais completo. Suponhamos um componente como o abaixo:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  moduleId: <span class="keyword">module</span>.id,</span><br><span class="line">  selector: 'example',</span><br><span class="line">  templateUrl: 'example.component.html'</span><br><span class="line">&#125;)</span><br><span class="line">export class ExampleComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> carro: Carro;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private exampleService: ExampleService) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit() &#123;</span><br><span class="line">    <span class="comment">// Busca a instância de carro no servidor.</span></span><br><span class="line">    <span class="keyword">this</span>.exampleService.getCarro(<span class="number">1</span>)</span><br><span class="line">      .subscribe(carro =&gt; <span class="keyword">this</span>.carro = carro);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>E que usa o seguinte template HTML:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Detalhes do Carro<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>ID: &#123;&#123; carro.id &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Marca: &#123;&#123; carro.marca &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Modelo: &#123;&#123; carro.modelo &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Cor: &#123;&#123; carro.cor &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Ao iniciar a aplicação vamos ter um erro, pois o Angular tentará ler a propriedade <code>id</code> de <code>carro</code>, sendo que inicialmente <code>carro</code> é nulo, pois quando o componente é renderizado na tela, não deu tempo do <em>browser</em> terminar a requisição HTTP e buscar o objeto. Teremos uma mensagem semelhante ao seguinte: <code>cannot read property &#39;id&#39; of undefined</code>.</p>
+<p>Podemos resolver isso, ao utilizar o <em>Elvis Operator</em> (<code>?.</code>). No exemplo abaixo, ele verifica se <code>carro</code> é nulo: se for nulo, ele <em>deixa quieto</em>; porém se carro realmente for um objeto, só então, ele tentará acessar os respectivas atributos de <code>carro</code>.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Detalhes do Carro<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>ID: &#123;&#123; carro?.id &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Marca: &#123;&#123; carro?.marca &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Modelo: &#123;&#123; carro?.modelo &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Cor: &#123;&#123; carro?.cor &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Porém é necessário ter cuidado ao usar o <em>Elvis Operator</em> juntamente com o <em>two-way data binding</em>, o que não é suportado. Isso pode acontecer ao usarmos a diretiva <code>ngModel</code> em um formulário, por exemplo.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Cadastrar novo Carro<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Marca<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [(<span class="attr">ngModel</span>)]=<span class="string">"carro?.marca"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Modelo<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [(<span class="attr">ngModel</span>)]=<span class="string">"carro?.modelo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Cor<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [(<span class="attr">ngModel</span>)]=<span class="string">"carro?.cor"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>No exemplo acima teremos um erro: <code>The &#39;?.&#39; operator cannot be used in the assignment at column 5 in [carro?.marca=$event] in ExampleComponent</code>. Isso acontece pois, ao fazer o <em>two-way binding</em>, o Angular precisa colocar valores dentro de <code>carro?.marca</code>, e isso não é suportado usando o <em>Elvis Operator</em> (ainda). É possível contornar o problema quebrando o <code>[(ngModel)]</code> em duas partes, como no exemplo a seguir.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Marca<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [<span class="attr">ngModel</span>]=<span class="string">"carro?.marca"</span> (<span class="attr">ngModelChange</span>)=<span class="string">"carro.marca=$event"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Modelo<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [<span class="attr">ngModel</span>]=<span class="string">"carro?.modelo"</span> (<span class="attr">ngModelChange</span>)=<span class="string">"carro.modelo=$event"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>Cor<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> [<span class="attr">ngModel</span>]=<span class="string">"carro?.cor"</span> (<span class="attr">ngModelChange</span>)=<span class="string">"carro.cor=$event"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Isso funciona, mas na <em>minha opinião</em> fica verboso demais. E no final das contas, acaba parecendo uma gambiarra. Repare também que existe uma <em>issue</em> aberta para que o <a href="https://github.com/angular/angular/issues/7697" target="_blank" rel="external"><em>Elvis Operator</em> seja suportado pelo <em>two-way data binding</em></a>. (Quem sabe no futuro ele não funciona com o <code>[(ngModel)]</code>?)</p>
+<p>De qualquer forma, no meu trabalho, ao invés de usar o <em>Elvis Operator</em>, eu achei mais sucinto e elegante criar um objeto vazio para ser temporariamente renderizado, enquanto o objeto com os dados verdadeiros ainda não é carregado. Para isso eu alterei o meu componente para o seguinte:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  moduleId: <span class="keyword">module</span>.id,</span><br><span class="line">  selector: 'example',</span><br><span class="line">  templateUrl: 'example.component.html'</span><br><span class="line">&#125;)</span><br><span class="line">export class ExampleComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Um objeto vazio para servir de "placeholder".</span></span><br><span class="line">  <span class="keyword">private</span> carro: Carro = <span class="keyword">new</span> Carro();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private exampleService: ExampleService) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit() &#123;</span><br><span class="line">    <span class="keyword">this</span>.exampleService.getCarro(<span class="number">1</span>)</span><br><span class="line">      .subscribe(carro =&gt; <span class="keyword">this</span>.carro = carro);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Assim, a tela é carregada usando os atributos do objeto vazio. Porém, logo que o objeto real chega, a tela é alterada para refletir os valores do objeto verdadeiro. E isso <strong>sem</strong> usar o <em>Elvis Operator</em>.</p>
+<p>Concluindo, o <em>Elvis Operator</em> pode ser muito útil em algumas situações. Mas, pelo menos na <strong>minha opinião</strong>, acaba com cara de gambiarra. Apesar de que, se ele está presente na documentação oficial com certeza tem usos legítimos. Mas eu sinto que uma solução mais simples e elegante é renderizar um objeto temporário na tela que será substituído pelo objeto verdadeiro depois.</p>
+<!--
+Links não utilizados:
+
+[cheatsheet]: https://angular.io/docs/ts/latest/guide/cheatsheet.html
+[stackoverflow-question]: http://stackoverflow.com/questions/35161789/correct-use-of-elvis-operator-in-angular2-for-dart-components-view
+[elvis-on-syntaxsuccess]: http://www.syntaxsuccess.com/viewarticle/elvis-operator-in-angular-2.0
+-->
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://possatti.com.br/angular2-elvis-operator/" data-id="civ4lzrlc0007jmre6mt9c8sc" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>seguir:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="https://plus.google.com/+LucasPossatti" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/possatti" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/possatti" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/angular-update/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antigos</strong>
+        <p class="article-nav-title">Atualização para o Angular 2 Final</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recentes</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/angular2-elvis-operator/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/angular2.png)" alt="Elvis Operator - Angular 2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/angular2-elvis-operator/" class="title">Elvis Operator - Angular 2</a></p>
+                            <p class="item-date"><time datetime="2016-11-05T01:18:00.000Z" itemprop="datePublished">04/11/2016</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/angular-update/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/angular2.png)" alt="Atualização para o Angular 2 Final" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/angular-update/" class="title">Atualização para o Angular 2 Final</a></p>
+                            <p class="item-date"><time datetime="2016-10-15T16:27:00.000Z" itemprop="datePublished">15/10/2016</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/curso-de-git/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/git-logo.png)" alt="Curso de git" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/curso-de-git/" class="title">Curso de git</a></p>
+                            <p class="item-date"><time datetime="2016-07-12T08:32:52.000Z" itemprop="datePublished">12/07/2016</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/sincap/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/sincap-logo.png)" alt="Sincap" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/sincap/" class="title">Sincap</a></p>
+                            <p class="item-date"><time datetime="2016-07-12T07:54:40.000Z" itemprop="datePublished">12/07/2016</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="http://leds.sr.ifes.edu.br/as-cronicas-de-um-padawan-by-lucas-possatti/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/leds.png)" alt="Minha experiência no LEDS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="http://leds.sr.ifes.edu.br/as-cronicas-de-um-padawan-by-lucas-possatti/" class="title">Minha experiência no LEDS</a></p>
+                            <p class="item-date"><time datetime="2016-07-12T06:10:53.000Z" itemprop="datePublished">12/07/2016</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">arquivos</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">Novembro 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">Outubro 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">Julho 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">Junho 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">Março 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">Agosto 2014</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/">IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leds/">leds</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protip/">protip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell-script/">shell script</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IoT/" style="font-size: 10px;">IoT</a> <a href="/tags/angular2/" style="font-size: 15px;">angular2</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 10px;">jekyll</a> <a href="/tags/leds/" style="font-size: 20px;">leds</a> <a href="/tags/protip/" style="font-size: 10px;">protip</a> <a href="/tags/shell-script/" style="font-size: 10px;">shell script</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Lucas Possatti</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'possatti';
+    
+    
+    var disqus_url = 'http://possatti.com.br/angular2-elvis-operator/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
