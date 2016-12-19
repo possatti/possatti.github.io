@@ -3,21 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Página não encontrada | Lucas Possatti</title>
+    <title>Git Subtrees | Lucas Possatti</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="Desculpe, mas a página que você está tentando acessar não existe, ou foi movida. Talvez você possa encontrar o que procura no menu de buscas logo acima.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Página não encontrada">
-<meta property="og:url" content="http://possatti.com.br/404.html">
+        <meta name="keywords" content="git" />
+    
+    <meta name="description" content="Eu explico como usar o comando Git Subtree que pode ser usado para importar um repositório Git para dentro de outro repositório Git.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Subtrees">
+<meta property="og:url" content="http://possatti.com.br/git-subtrees/index.html">
 <meta property="og:site_name" content="Lucas Possatti">
-<meta property="og:description" content="Desculpe, mas a página que você está tentando acessar não existe, ou foi movida. Talvez você possa encontrar o que procura no menu de buscas logo acima.">
-<meta property="og:image" content="http://possatti.com.br/images/sad-face-meme.jpg">
-<meta property="og:updated_time" content="2016-06-24T22:25:13.007Z">
+<meta property="og:description" content="Eu explico como usar o comando Git Subtree que pode ser usado para importar um repositório Git para dentro de outro repositório Git.">
+<meta property="og:image" content="http://possatti.com.br/images/git-logo.png">
+<meta property="og:updated_time" content="2016-12-19T14:05:49.949Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Página não encontrada">
-<meta name="twitter:description" content="Desculpe, mas a página que você está tentando acessar não existe, ou foi movida. Talvez você possa encontrar o que procura no menu de buscas logo acima.">
-<meta name="twitter:image" content="http://possatti.com.br/images/sad-face-meme.jpg">
+<meta name="twitter:title" content="Git Subtrees">
+<meta name="twitter:description" content="Eu explico como usar o comando Git Subtree que pode ser usado para importar um repositório Git para dentro de outro repositório Git.">
+<meta name="twitter:image" content="http://possatti.com.br/images/git-logo.png">
     
 
     
@@ -104,32 +106,56 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="/404.html">Página não encontrada</em>
+    sem categoria
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="page-undefined" class="article article-single article-type-page" itemscope itemprop="blogPost">
+                            <article id="post-git-subtrees" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Página não encontrada
+        Git Subtrees
         </h1>
     
 
             </header>
         
         <div class="article-subtitle">
-            <a href="/404.html" class="article-date">
-    <time datetime="2015-03-26T00:05:29.000Z" itemprop="datePublished">25/03/2015</time>
+            <a href="/git-subtrees/" class="article-date">
+    <time datetime="2016-12-19T15:05:00.000Z" itemprop="datePublished">19/12/2016</time>
 </a>
             
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <p>Desculpe, mas a página que você está tentando acessar não existe, ou foi movida. Talvez você possa encontrar o que procura no menu de buscas logo acima.</p>
-<p><img src="/images/sad-face-meme.jpg" style="width:200px;height:200px;"></p>
+            <p>Vamos supor que você deseja importar um repositório Git para dentro de outro repositório Git. Como você faria isso? Vou te dizer que você tem duas opções: Submodules, ou Subtrees.</p>
+<p>Os dois tem suas vantagens e desvantagens. A primeira vez que eu caí nessa necessidade, optei por Submodules, porque foi a primeira opção que encontrei, e Subtrees pareciam complicados. Hoje a minha opinião é o inverso disso. Submodules são fáceis de iniciar no repositório, mas difíceis de manter (principalmente se você trabalha com outras pessoas). Enquanto Subtrees parecem mais complicados quando você bate o olho, mas na realidade são muito mais fáceis de manter. Isso tudo é minha opnião, mas buscando na internet percebi que esse é o consenso.</p>
+<p>E não vou afirmar que Subtrees são melhores que Submodules em todas as situações. <strong>Com certeza não são.</strong> Mas eu acredito que boa parte das vezes eles são a melhor opção.</p>
+<p>Uma coisa a esclarecer é que o nome Subtree vêm de uma <a href="https://git-scm.com/book/en/v1/Git-Tools-Subtree-Merging" target="_blank" rel="external">estratégia de <em>merge</em></a> do Git, chamada Subtree (Woow). Que envolve fazer um <em>merge</em> aplicado a um diretório específico. E é exatamente essa estratégia de <em>merge</em> que é usada pelo <code>git subtree</code>. Mas a partir de agora, sempre que eu falar “Subtree”, estou me referindo ao comando <code>git subtree</code>.</p>
+<p>Nos exemplos abaixo, nós vamos trabalhar com dois repositórios Git. Então para ficar claro, vou explicar como vou me referir a cada um deles. Quando eu falar “repositório <em>container</em>“, estou me referindo ao repositório mais abrangente, que vai conter a Subtree e todo o resto do seu código que não faz parte da Subtree. E quando eu falar “sub-repositório”, estou me referindo ao repositório que têm os arquivos que você quer puxar para dentro do repositório <em>container</em> (a Subtree).</p>
+<p>O Git tem um comando <code>git subtree</code> integrado, porém talvez você se surpreenda com o fato de que ele não é um comando nativo como <code>git pull</code>, <code>git merge</code> e etc. Ele é um script criado pela comunidade que com o tempo ficou popular o suficiente para ser incluído dentro do Git. É possível usar Subtrees <a href="https://medium.com/@porteneuve/mastering-git-subtrees-943d29a798ec#.qp8ny5efo" target="_blank" rel="external">sem usar o comando <code>git subtree</code></a>, mas é um pouco mais difícil.</p>
+<h2 id="Usando-Subtrees"><a href="#Usando-Subtrees" class="headerlink" title="Usando Subtrees"></a>Usando Subtrees</h2><p>Existem quatro comandos importantes quando lidamos com Subtrees (na verdade três):</p>
+<!-- Escrever também sobre o `git subtree split` e `git subtree merge`. Ou talvez só apontar que eles existem. -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;subrepo-remoto&gt; &lt;subrepo-url&gt;</span><br><span class="line">git subtree add --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master --squash</span><br><span class="line">git subtree pull --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master --squash</span><br><span class="line">git subtree push --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;subrepo-remoto&gt;: Nome do remoto para o sub-repositório. (Exemplo: assets-do-joao)</span></span><br><span class="line"><span class="comment"># &lt;subrepo-url&gt;: Url do sub-repositório (Exemplo: github.com/joao/super-assets)</span></span><br><span class="line"><span class="comment"># &lt;subrepo-path&gt;: Diretório onde você vai "jogar" os arquivos do sub-repositório. (Exemplo: src/assets)</span></span><br></pre></td></tr></table></figure>
+<p>Subtrees são algo relativamente novo para mim, mas eu estou usando há algum tempo no trabalho e vou falar do que entendi. Primeiro eu recomendo que os três últimos comandos sejam executados sempre da raiz do repositório <em>container</em>. Assim você não se perde colocando o caminho errado. E o primeiro comando é apenas para simplificar as operações seguintes. E repare que aqui eu estou usando o <em>branch</em> <code>master</code> para o sub-repositório. Mas se você tem uma necessidade diferente, troque o nome do <em>branch</em>.</p>
+<p>Agora vamos ver cada um dos comandos com mais detalhes:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;subrepo-remoto&gt; &lt;subrepo-url&gt;</span><br></pre></td></tr></table></figure>
+<p>O comando <code>git remote add</code> adiciona o sub-repositório aos remotos do nosso repositório <em>container</em>. (Sem nenhum mistério até aqui.)</p>
+<!-- Lembrando que isso tem que ser feito para cada máquina que vai mexer com a Subtree. -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git subtree add --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master --squash</span><br></pre></td></tr></table></figure>
+<p><code>git subtree add</code> inicia uma Subtree no nosso repositório. Deve ser usado uma única vez (a primeira). Ele puxa todos os <em>commits</em> do sub-repositório e comprime eles em um único <em>commit</em> (<em>squash</em>) e faz um <em>merge</em> desse <em>commit</em> com o nosso repositório. Após fazermos um <code>git push</code> do nosso repositório <em>container</em>, todos os arquivos da Subtree estarão vivendo dentro do nosso repositório no servidor. Então qualquer pessoa que fizer <code>git clone</code> ou <code>git pull</code> vai ter tudo pronto já, e não vai precisar nem se estressar em saber o que são Subtrees.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git subtree pull --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master --squash</span><br></pre></td></tr></table></figure>
+<p><code>git subtree pull</code> puxa todos os <em>commits</em> do sub-repositório, comprime em um único <em>commit</em> (<em>squash</em>) e faz <em>merge</em> com nosso repositório. Após fazer <code>git push</code> todo mundo terá as alterações.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git subtree push --prefix &lt;subrepo-path&gt; &lt;subrepo-remoto&gt; master</span><br></pre></td></tr></table></figure>
+<p><code>git subtree push</code> irá “caçar” todos os <em>commits</em> do nosso repositório <em>container</em> que mexem em alguma coisa no diretório da Subtree (<code>&lt;subrepo-path&gt;</code>); vai criar um novo <em>branch</em> temporário somente com esses <em>commits</em>; e vai mandar os <em>commits</em> desse <em>branch</em> para o servidor do sub-repositório. E agora a pessoa que mantém o sub-repositório terá nossas alterações.</p>
+<p>A princípio pode ser difícil de entender o que o <code>git subtree push</code> está fazendo, mas você pode usar o comando <a href="http://stackoverflow.com/a/12819896" target="_blank" rel="external"><code>git subtree split</code></a> para ter uma ideia mais detalhada do que realmente está acontecendo.</p>
+<h2 id="Recomendacoes"><a href="#Recomendacoes" class="headerlink" title="Recomendações"></a>Recomendações</h2><p>Quando você estiver trabalhando no repositório <em>container</em> e mexer em alguma coisa do sub-repositório paralelamente a alterações nos arquivos do repositório <em>container</em>, separe as coisas. Faça primeiro um <em>commit</em> contendo as alterações que pertencem a Subtree, e depois um <em>commit</em> com as alterações do repositório <em>container</em>. Isso não é 100% necessário, pois o comando <code>git subtree</code> vai conseguir dar conta de qualquer situação, mas ajuda na sua organização, pois as mensagens de cada <em>commit</em> ficarão mais intuitivas.</p>
+<p>Use sempre a barra do Unix <code>/</code> (eu nunca me lembro qual é a barra, e qual é a contra barra T.T). Mesmo no Windows, use <code>/</code> para separar os diretórios. Uma vez eu usei com “a barra do Windows” (<code>\</code>), e aparentemente tinha funcionado, mas logo depois tive problemas. Então fica a dica.</p>
+<h2 id="Concluindo"><a href="#Concluindo" class="headerlink" title="Concluindo"></a>Concluindo</h2><p>Se você quiser uma outra leitura, para entender melhor o assunto, eu recomendo que você leia o post da Atlassian sobre Subtrees chamado <a href="https://developer.atlassian.com/blog/2015/05/the-power-of-git-subtree/" target="_blank" rel="external"><em>The Power of Subtree</em></a>. Além do post mais aprofundado de Christophe Porteneuve: <a href="https://medium.com/@porteneuve/mastering-git-subtrees-943d29a798ec#.qp8ny5efo" target="_blank" rel="external"><em>Mastering Git subtrees</em></a>. Esses dois materiais me ajudaram muito.</p>
 
         </div>
         <footer class="article-footer">
@@ -137,7 +163,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://possatti.com.br/404.html" data-id="ciww5okog0000k3re3n0xw5m4" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
+    <a data-url="http://possatti.com.br/git-subtrees/" data-id="ciww5okrk000ak3reqkr393xn" class="article-share-link"><i class="fa fa-share"></i>Compartilhar</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -201,6 +227,16 @@ ga('send', 'pageview');
     </div>
 </article>
 
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
                         </div>
                     </section>
                     <aside id="sidebar">
@@ -243,6 +279,19 @@ ga('send', 'pageview');
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/angular2-elvis-operator/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">antigos</strong>
+        <p class="article-nav-title">Elvis Operator - Angular 2</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -417,13 +466,13 @@ ga('send', 'pageview');
     var disqus_shortname = 'possatti';
     
     
-    var disqus_url = 'http://possatti.com.br/404.html';
+    var disqus_url = 'http://possatti.com.br/git-subtrees/';
     
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
